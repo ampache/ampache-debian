@@ -1,4 +1,4 @@
-ampache (3.7.1-1) UNRELEASED; urgency=low
+ampache (3.7.1-develop1-1) UNRELEASED; urgency=low
 
   * New upstream snapshot
   * Switch to dpkg-source 3.0 (quilt) format

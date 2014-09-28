@@ -28,14 +28,14 @@ Pre-Depends: dpkg (>= 1.15.7.2)
 Depends: ${misc:Depends},
  debconf (>= 0.5) | debconf-2.0,
  libapache2-mod-php5 | php5,
- ampache-common (>= 3.7.1),
+ ampache-common (>= 3.7.1-develop1-1),
  php5-cli,
  php5-mysql,
  php5-xmlrpc,
  php5-json,
  ucf
-Replaces: ampache (<< 3.7.1)
-Breaks: ampache (<< 3.7.1)
+Replaces: ampache (<< 3.7.1-develop1-1)
+Breaks: ampache (<< 3.7.1-develop1-1)
 Recommends: ${misc:Recommends}, php5-curl, apache2 | httpd,
 Suggests: php5-gd, phpmyadmin, mysql-server, eyed3, faad, ffmpeg, vorbis-tools
 Description: web-based audio file management system
@@ -60,8 +60,8 @@ Depends: ${misc:Depends},
  ttf-freefont,
  php-getid3 (>= 1.9.5),
  php-openid
-Replaces: ampache (<< 3.7.1)
-Breaks: ampache (<< 3.7.1)
+Replaces: ampache (<< 3.7.1-develop1-1)
+Breaks: ampache (<< 3.7.1-develop1-1)
 Suggests: ampache, php5-gd, phpmyadmin, mysql-server, eyed3, faad, ffmpeg, vorbis-tools
 Description: web-based audio file management system common files
  This package provides common files for Ampache. This package is server
