@@ -1,16 +1,22 @@
 admin       usr/share/ampache/www
 bin         usr/share/ampache/www
+channel     usr/share/ampache/www
 config      usr/share/ampache/www
+daap        usr/share/ampache/www
 images      usr/share/ampache/www
 lib         usr/share/ampache/www
 locale      usr/share/ampache/www
 modules     usr/share/ampache/www
 play        usr/share/ampache/www
+plex        usr/share/ampache/www
+rest        usr/share/ampache/www
 server      usr/share/ampache/www
 sql         usr/share/ampache/www
 templates   usr/share/ampache/www
 themes      usr/share/ampache/www
+upnp        usr/share/ampache/www
 *php        usr/share/ampache/www
 *ico        usr/share/ampache/www
+*xml        usr/share/ampache/www
 
 

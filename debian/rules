@@ -9,7 +9,7 @@ DEB_UPSTREAM_VERSION=$(shell dpkg-parsechangelog | sed -rne 's,^Version: ([^-]+)
 	dh $@ --with apache2,linktree
 
 override_dh_installdirs:
-	dh_installdirs -pampache-common $(USAW)/modules/prototype
+	dh_installdirs -pampache-common $(USAW)/modules/jquery
 
 override_dh_install:
 	dh_install -XCOPYING -XLICENSE
