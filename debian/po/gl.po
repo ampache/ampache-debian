@@ -1,0 +1,52 @@
+# Galician translation of Ampache debconf templates.
+# Copyright (C) 2007 Ampache.org
+# This file is distributed under the same license as the Ampache package.
+# Jacobo Tarrio <jtarrio@debian.org>, 2007.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ampache\n"
+"Report-Msgid-Bugs-To: ampache@packages.debian.org\n"
+"POT-Creation-Date: 2012-05-24 09:56-0500\n"
+"PO-Revision-Date: 2007-10-14 12:29+0100\n"
+"Last-Translator: Jacobo Tarrio <jtarrio@debian.org>\n"
+"Language-Team: Galician <proxecto@trasno.net>\n"
+"Language: gl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: boolean
+#. Description
+#: ../ampache.templates:2001
+#, fuzzy
+#| msgid "Restart Apache 2 web server?"
+msgid "Configure and restart the web server?"
+msgstr "¿Reiniciar o servidor web Apache2?"
+
+#. Type: boolean
+#. Description
+#: ../ampache.templates:2001
+#, fuzzy
+#| msgid ""
+#| "The Apache 2 web server needs to be restarted to enable Ampache. Please "
+#| "choose whether you want to restart it automatically now or do it yourself "
+#| "later."
+msgid ""
+"The web server needs to be reconfigured and restarted to enable Ampache. "
+"Please choose whether you want to restart it automatically now or do it "
+"yourself later."
+msgstr ""
+"É preciso reiniciar o servidor web Apache 2 para activar Ampache. Indique se "
+"o quere reiniciar automaticamente agora ou se o ha querer facer máis tarde."
+
+#. Type: boolean
+#. Description
+#: ../ampache.templates:2001
+msgid ""
+"To manually restart the web server, use one of the following commands: \"/"
+"etc/init.d/apache2 restart\" or \"/etc/init.d/lighttpd restart\""
+msgstr ""
+
+#~ msgid "Configure Apache 2 web server for use with Ampache?"
+#~ msgstr "¿Configurar o servidor wev Apache2 para o empregar con Ampache?"

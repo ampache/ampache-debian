@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -e
+
+AMPCFG="/etc/ampache/ampache.cfg.php"
+WWW="/usr/share/ampache/www"
+
+if [ "$1" = "upgrade" ]; then
+	#make a backup copy of ampache.cfg.php on upgrades
+	if [ -f $AMPCFG ] && [ -h $WWW/config/ampache.cfg.php ]; then
+		cp -a $AMPCFG /etc/ampache/ampache_$(date +%Y%m%d).cfg.php
+	fi
+fi
+
+#DEBHELPER#
+
+exit 0

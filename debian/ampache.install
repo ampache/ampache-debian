@@ -1,0 +1,2 @@
+debian/conf/ampache.conf /usr/share/ampache/www/config
+

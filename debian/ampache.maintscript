@@ -1,0 +1,4 @@
+#!/bin/sh
+
+rm_conffile /etc/logrotate.d/ampache 3.6-git408e713+dfsg-3.1 ampache
+rm_conffile /etc/cron.daily/ampache 3.6-git408e713+dfsg-3.1 ampache

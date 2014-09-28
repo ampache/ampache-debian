@@ -1,0 +1,68 @@
+# Czech translation of Ampache debconf templates.
+# Copyright (C) 2007 Ampache.org
+# This file is distributed under the same license as the Ampache package.
+# 2007, 2010 Miroslav Kure <kurem@debian.cz>.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ampache\n"
+"Report-Msgid-Bugs-To: ampache@packages.debian.org\n"
+"POT-Creation-Date: 2012-05-24 09:56-0500\n"
+"PO-Revision-Date: 2010-09-04 19:55+0200\n"
+"Last-Translator: Miroslav Kure <kurem@debian.cz>\n"
+"Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: boolean
+#. Description
+#: ../ampache.templates:2001
+msgid "Configure and restart the web server?"
+msgstr "Nastavit a restartovat webový server?"
+
+#. Type: boolean
+#. Description
+#: ../ampache.templates:2001
+msgid ""
+"The web server needs to be reconfigured and restarted to enable Ampache. "
+"Please choose whether you want to restart it automatically now or do it "
+"yourself later."
+msgstr ""
+"Aby se Ampache aktivoval, musíte restartovat webový server. Rozhodněte se, "
+"zda se má restartovat automaticky, nebo zda to provedete později sami."
+
+#. Type: boolean
+#. Description
+#: ../ampache.templates:2001
+msgid ""
+"To manually restart the web server, use one of the following commands: \"/"
+"etc/init.d/apache2 restart\" or \"/etc/init.d/lighttpd restart\""
+msgstr ""
+"Pro ruční restart webového serveru použijte dle situace „/etc/init.d/apache2 "
+"restart“ nebo „/etc/init.d/lighttpd restart“."
+
+#~ msgid "apache2"
+#~ msgstr "apache2"
+
+#~ msgid "lighttpd"
+#~ msgstr "lighttpd"
+
+#~ msgid "Web server to configure automatically:"
+#~ msgstr "Webové servery, které se mají nastavit automaticky:"
+
+#~ msgid ""
+#~ "Please select the web server to be configured automatically for Ampache."
+#~ msgstr ""
+#~ "Vyberte webové servery, které se mají automaticky nastavit pro Ampache."
+
+#~ msgid ""
+#~ "Apache2 and Lighttpd are the only supported web servers for automatic "
+#~ "configuration."
+#~ msgstr ""
+#~ "Apache2 a Lighttpd jsou jediné podporované webové servery, které lze "
+#~ "nastavit automaticky."
+
+#~ msgid "Configure Apache 2 web server for use with Ampache?"
+#~ msgstr "Nastavit webový server Apache 2 tak, aby pracoval s Ampache?"

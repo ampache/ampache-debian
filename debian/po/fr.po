@@ -1,0 +1,74 @@
+# French translation of ampache debconf templates.
+# Copyright (C) 2007 ampache.org
+# This file is distributed under the same license as the ampache package.
+#
+# Geoffroy Your Berret <mxondebian@free.fr>, 2007.
+# Filippo Rusconi <rusconi-debian@laposte.net>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: ampache\n"
+"Report-Msgid-Bugs-To: ampache@packages.debian.org\n"
+"POT-Creation-Date: 2012-05-24 09:56-0500\n"
+"PO-Revision-Date: 2010-05-05 00:09+0200\n"
+"Last-Translator: Filippo Rusconi <rusconi-debian@laposte.net>\n"
+"Language-Team: French <debian-l10n-french@lists.debian.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. Type: boolean
+#. Description
+#: ../ampache.templates:2001
+msgid "Configure and restart the web server?"
+msgstr "Configurer et redémarrer le serveur web ?"
+
+#. Type: boolean
+#. Description
+#: ../ampache.templates:2001
+msgid ""
+"The web server needs to be reconfigured and restarted to enable Ampache. "
+"Please choose whether you want to restart it automatically now or do it "
+"yourself later."
+msgstr ""
+"Le serveur web doit être reconfiguré et redémarré pour prendre en compte "
+"Ampache. Veuillez indiquer s'il doit être redémarré automatiquement "
+"maintenant ou s'il sera redémarré manuellement ultérieurement."
+
+#. Type: boolean
+#. Description
+#: ../ampache.templates:2001
+msgid ""
+"To manually restart the web server, use one of the following commands: \"/"
+"etc/init.d/apache2 restart\" or \"/etc/init.d/lighttpd restart\""
+msgstr ""
+"Pour redémarrer manuellement le serveur web, employer l'une des deux "
+"commandes suivantes : « /etc/init.d/apache2 reload » ou « /etc/init.d/"
+"lighttpd restart »."
+
+#~ msgid "apache2"
+#~ msgstr "apache2"
+
+#~ msgid "lighttpd"
+#~ msgstr "lighttpd"
+
+#~ msgid "Web server to configure automatically:"
+#~ msgstr "Serveur web à configurer automatiquement :"
+
+#~ msgid ""
+#~ "Please select the web server to be configured automatically for Ampache."
+#~ msgstr ""
+#~ "Sélectionner le serveur web à configurer automatiquement pour Ampache."
+
+#~ msgid ""
+#~ "Apache2 and Lighttpd are the only supported web servers for automatic "
+#~ "configuration."
+#~ msgstr ""
+#~ "Apache2 et Lighttpd sont les seuls serveurs web disposant d'une "
+#~ "configuration automatique."
+
+#~ msgid "Configure Apache 2 web server for use with Ampache?"
+#~ msgstr ""
+#~ "Faut-il configurer le serveur web Apache 2 pour l'utiliser avec ampache ?"
