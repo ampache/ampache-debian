@@ -1,0 +1,69 @@
+# Tamil translation of Ampache debconf templates.
+# Copyright (C) 2007 Ampache.org.
+# This file is distributed under the same license as the Ampache package.
+#
+# 2007 Dr.T.Vasudevan <agnihot3@gmail.com>.
+msgid ""
+msgstr ""
+"Project-Id-Version: ampache\n"
+"Report-Msgid-Bugs-To: ampache@packages.debian.org\n"
+"POT-Creation-Date: 2012-05-24 09:56-0500\n"
+"PO-Revision-Date: 2010-08-29 07:22+0530\n"
+"Last-Translator: Dr.T.Vasudevan <agnihot3@gmail.com>\n"
+"Language-Team: TAMIL <ubuntu-l10n-tam@lists.ubuntu.com>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#. Type: boolean
+#. Description
+#: ../ampache.templates:2001
+msgid "Configure and restart the web server?"
+msgstr "வடிவமைத்து வலை சேவையகத்தை மீள்துவக்கவா?"
+
+#. Type: boolean
+#. Description
+#: ../ampache.templates:2001
+msgid ""
+"The web server needs to be reconfigured and restarted to enable Ampache. "
+"Please choose whether you want to restart it automatically now or do it "
+"yourself later."
+msgstr ""
+"அம்பாசே ஐ செயல்படுத்த வலை சேவையகத்தை மறு வடிவமைத்து மீள்துவக்க வேண்டியுள்ளது. தயை "
+"செய்து இப்போது அதை தானியங்கியாக துவக்க வேண்டுமா அல்லது நீங்களே பின்னால் அதை "
+"துவக்குவீர்களா என தேர்ந்தெடுங்கள்."
+
+#. Type: boolean
+#. Description
+#: ../ampache.templates:2001
+msgid ""
+"To manually restart the web server, use one of the following commands: \"/"
+"etc/init.d/apache2 restart\" or \"/etc/init.d/lighttpd restart\""
+msgstr ""
+"கைமுறையாக வலை சேவையகத்தி மீள்துவக்க பின் வரும் கட்டளைகளில் ஒன்றை பயன்படுத்தவும்: etc/"
+"init.d/apache2 restart\" அல்லது \"/etc/init.d/lighttpd restart\""
+
+#~ msgid "apache2"
+#~ msgstr "அபாசே2"
+
+#~ msgid "lighttpd"
+#~ msgstr "லைட்டிபிடி"
+
+#~ msgid "Web server to configure automatically:"
+#~ msgstr "தானியங்கி வடிவமைப்புக்கு வலை சேவையகம்"
+
+#~ msgid ""
+#~ "Please select the web server to be configured automatically for Ampache."
+#~ msgstr "அம்பாச்சேக்கு தானியங்கியாக வடிவமைக்க வலை சேவையகத்தை தேர்ந்தெடுக்கவும்."
+
+#~ msgid ""
+#~ "Apache2 and Lighttpd are the only supported web servers for automatic "
+#~ "configuration."
+#~ msgstr ""
+#~ "தானியங்கி வடிவமைப்புக்கு ஆதரவு தரும் வ்லை சேவையகங்கள் அபாசே2 மற்றும் லைட்டிபிடி "
+#~ "மட்டுமே."
+
+#~ msgid "Configure Apache 2 web server for use with Ampache?"
+#~ msgstr "அபாசே 2 வலை சேவையகத்தை அம்பாசே உடன் வடிவமைக்கவா?"

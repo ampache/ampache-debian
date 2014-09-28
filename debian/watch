@@ -1,0 +1,6 @@
+version=3
+#opts=dversionmangle=s/\.*dfsg\.\d+$//,filenamemangle=s/.*-(.*)/$1/ \
+#http://ampache.org/downloads/ampache-(3.*)\.tar\.gz
+
+The current version of Ampache is a git snapshot, with the tarball being created
+in debian/rules get-orig-source target.

@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+# This link is created in postinst, so must be removed explicitly.
+if [ -e /etc/ampache/ampache.conf ]; then
+	rm -f /etc/ampache/ampache.conf
+fi
+
+#DEBHELPER#
+
+exit 0

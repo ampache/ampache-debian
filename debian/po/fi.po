@@ -1,0 +1,55 @@
+# fi translations for Ampache debconf templates.
+# Copyright (C) 2007 Ampache.org
+# This file is distributed under the same license as the Ampache package.
+# 2007 Esko Arajarvi <edu@iki.fi>.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ampache\n"
+"Report-Msgid-Bugs-To: ampache@packages.debian.org\n"
+"POT-Creation-Date: 2012-05-24 09:56-0500\n"
+"PO-Revision-Date: 2007-10-12 23:52+0200\n"
+"Last-Translator: Esko Arajärvi <edu@iki.fi>\n"
+"Language-Team: Finnish <debian-l10n-finnish@lists.debian.org>\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Finnish\n"
+"X-Poedit-Country: FINLAND\n"
+
+#. Type: boolean
+#. Description
+#: ../ampache.templates:2001
+#, fuzzy
+#| msgid "Restart Apache 2 web server?"
+msgid "Configure and restart the web server?"
+msgstr "Käynnistetäänkö Apache2-verkkopalvelin uudelleen?"
+
+#. Type: boolean
+#. Description
+#: ../ampache.templates:2001
+#, fuzzy
+#| msgid ""
+#| "The Apache 2 web server needs to be restarted to enable Ampache. Please "
+#| "choose whether you want to restart it automatically now or do it yourself "
+#| "later."
+msgid ""
+"The web server needs to be reconfigured and restarted to enable Ampache. "
+"Please choose whether you want to restart it automatically now or do it "
+"yourself later."
+msgstr ""
+"Apache 2 -verkkopalvelin pitää käynnistää uudelleen Ampachen "
+"käyttöönottamiseksi. Valitse haluatko käynnistää sen automaattisesti nyt vai "
+"käsin myöhemmin."
+
+#. Type: boolean
+#. Description
+#: ../ampache.templates:2001
+msgid ""
+"To manually restart the web server, use one of the following commands: \"/"
+"etc/init.d/apache2 restart\" or \"/etc/init.d/lighttpd restart\""
+msgstr ""
+
+#~ msgid "Configure Apache 2 web server for use with Ampache?"
+#~ msgstr "Asetetaanko Apache 2 -verkkopalvelin käytettäväksi Ampachen kanssa?"

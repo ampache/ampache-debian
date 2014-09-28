@@ -1,0 +1,94 @@
+# ampache po-debconf translation to Spanish.
+# Copyright (C) 2009, 2010 Software in the Public Interest
+# This file is distributed under the same license as the ampache package.
+#
+# Changes:
+#   - Initial translation
+#       Gary Ariel Sandi Vigabriel <gary.gsv@gmail.com>, 2009
+#
+#   - Updates
+#       Francisco Javier Cuadrado <fcocuadrado@gmail.com>, 2009, 2010
+#
+# Traductores, si no conocen el formato PO, merece la pena leer la
+# documentación de gettext, especialmente las secciones dedicadas a este
+# formato, por ejemplo ejecutando:
+#       info -n '(gettext)PO Files'
+#       info -n '(gettext)Header Entry'
+#
+# Equipo de traducción al español, por favor lean antes de traducir
+# los siguientes documentos:
+#
+#   - El proyecto de traducción de Debian al español
+#     http://www.debian.org/intl/spanish/
+#     especialmente las notas y normas de traducción en
+#     http://www.debian.org/intl/spanish/notas
+#
+#   - La guía de traducción de po's de debconf:
+#     /usr/share/doc/po-debconf/README-trans
+#     o http://www.debian.org/intl/l10n/po-debconf/README-trans
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ampache 3.5.4-2\n"
+"Report-Msgid-Bugs-To: ampache@packages.debian.org\n"
+"POT-Creation-Date: 2012-05-24 09:56-0500\n"
+"PO-Revision-Date: 2010-05-04 09:22+0100\n"
+"Last-Translator: Francisco Javier Cuadrado <fcocuadrado@gmail.com>\n"
+"Language-Team: Debian l10n Spanish <debian-l10n-spanish@lists.debian.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: boolean
+#. Description
+#: ../ampache.templates:2001
+msgid "Configure and restart the web server?"
+msgstr "¿Desea configurar y reiniciar el servidor web?"
+
+#. Type: boolean
+#. Description
+#: ../ampache.templates:2001
+msgid ""
+"The web server needs to be reconfigured and restarted to enable Ampache. "
+"Please choose whether you want to restart it automatically now or do it "
+"yourself later."
+msgstr ""
+"El servidor web se debe reconfigurar y reiniciar para activar Ampache. Por "
+"favor, escoja si desea reiniciarlo automáticamente ahora o si lo hará usted "
+"mismo más tarde."
+
+#. Type: boolean
+#. Description
+#: ../ampache.templates:2001
+msgid ""
+"To manually restart the web server, use one of the following commands: \"/"
+"etc/init.d/apache2 restart\" or \"/etc/init.d/lighttpd restart\""
+msgstr ""
+"Para reiniciar manualmente el servidor web, utilice una de las siguientes "
+"órdenes: «/etc/init.d/apache2 restart» o «/etc/init.d/lighttpd restart»"
+
+#~ msgid "apache2"
+#~ msgstr "apache2"
+
+#~ msgid "lighttpd"
+#~ msgstr "lighttpd"
+
+#~ msgid "Web server to configure automatically:"
+#~ msgstr "Servidor web a configurar automáticamente:"
+
+#~ msgid ""
+#~ "Please select the web server to be configured automatically for Ampache."
+#~ msgstr ""
+#~ "Escoja el servidor web que se configurará automáticamente para Ampache."
+
+#~ msgid ""
+#~ "Apache2 and Lighttpd are the only supported web servers for automatic "
+#~ "configuration."
+#~ msgstr ""
+#~ "Apache2 y Lighttpd son los únicos servidores web que se pueden configurar "
+#~ "automáticamente."
+
+#~ msgid "Configure Apache 2 web server for use with Ampache?"
+#~ msgstr ""
+#~ "¿Desea configurar el servidor web Apache 2 para utilizarlo con Ampache?"

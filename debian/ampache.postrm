@@ -1,0 +1,58 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+if [ "$1" = "remove" ] || [ "$1" = "purge" ]; then
+
+	#restart web server is users answer is yes.
+	db_get ampache/restart_webserver || true
+	re_start="$RET"
+	if [ "$re_start" = "false" ]; then
+		printf "postrm: Please restart the web server manually.\n"
+	elif [ "$re_start" = "true" ]; then
+		if [ -e /var/run/apache2.pid ]; then
+			service apache2 reload
+		fi
+	else
+		printf "postrm: unable to de-configure ampache, please do so manually.\n"
+	fi
+fi
+
+if [ "$1" = "purge" ]; then
+
+	if [ -e /usr/bin/ucf ]; then
+		ucf --debconf-ok --purge /etc/ampache/ampache.conf
+		ucfr --force --purge ampache /etc/ampache/ampache.conf
+	fi
+
+	#Take out the trash, remove old files/symlinks if they exist.
+	if [ -e /etc/apache2/conf.d/ampache.conf ]; then
+		rm -f /etc/apache2/conf.d/ampache.conf
+	else
+		printf "postrm: /etc/apache2/conf.d/ampache.conf not present, nothing to do\n"
+	fi
+
+	if [ -e /etc/apache2/conf.d/ampache1.conf ]; then
+		rm -f /etc/apache2/conf.d/ampache.conf
+	else
+		printf "postrm: /etc/apache2/conf.d/ampache1.conf not present, nothing to do\n"
+	fi
+
+	if [ -e /etc/apache2/sites-enabled/ApacheAmpache ]; then
+   		rm -f /etc/apache2/sites-available/ApacheAmpache
+	else
+		printf "postrm: /etc/apache2/sites-enabled/ApacheAmpache not present, nothing to do\n"
+	fi
+
+	if [ -e /etc/apache2/sites-enabled/ampvhadd ]; then
+		rm -f /etc/apache2/sites-available/ampvhadd
+	else
+		printf "postrm: /etc/apache2/sites-enabled/ampvhadd not present, nothing to do\n"
+	fi
+fi
+
+#DEBHELPER#
+
+exit 0
