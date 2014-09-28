@@ -1,0 +1,34 @@
+#!/usr/bin/make -f
+
+USAW=/usr/share/ampache/www
+EA=/etc/ampache
+US=/usr/share
+DEB_UPSTREAM_VERSION=$(shell dpkg-parsechangelog | sed -rne 's,^Version: ([^-]+).*,\1,p')
+
+%:
+	dh $@ --with apache2,linktree
+
+override_dh_installdirs:
+	dh_installdirs -pampache-common $(USAW)/modules/prototype
+
+override_dh_install:
+	dh_install -XCOPYING -XLICENSE
+
+override_dh_link:
+	dh_link -pampache \
+		$(EA)/ampache.cfg.php $(USAW)/config/ampache.cfg.php \
+		$(USAW)/config/ampache.conf $(EA)/ampache.conf \
+		$(EA)/ampache.conf /etc/apache2/conf-available/ampache.conf \
+		$(USAW)/docs/CHANGELOG.gz $(US)/doc/ampache/changelog.gz;
+
+override_dh_linktree:
+	dh_linktree -pampache-common \
+		-Xlicence.txt -Xlicense-commerical.txt -XCOPYING -XLICENSE -XCOPYING.lib \
+		embed $(US)/javascript/jquery $(USAW)/modules/jquery \
+		embed $(US)/javascript/jquery-cookie $(USAW)/modules/jquery-cookie \
+		embed $(US)/javascript/jquery-jplayer $(USAW)/modules/jquery-jplayer \
+		embed $(US)/javascript/jquery-ui $(USAW)/modules/jquery-ui \
+		embed $(US)/php/Auth $(USAW)/modules/Auth \
+		embed $(US)/php/libphp-phpmailer $(USAW)/modules/phpmailer \
+		embed $(US)/php/php-gettext $(USAW)/modules/php-gettext \
+		embed $(US)/php/getid3 $(USAW)/modules/getid3;

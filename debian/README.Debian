@@ -1,0 +1,391 @@
+Ampache for Debian
+------------------
+
+PACKAGE SPLIT:
+
+Ampache has been split into ampache and ampache-common.  The ampache package
+installs everything needed to install and configure the Apache2 web server.
+The ampache-common package is provided for users who would like to deploy
+ampache on other web servers or in LXC's VM's or ChRoots where a web server
+installation in not wanted.  With the use of ampache-common the user/sys admin
+will have to manually setup ampache.  This will require the user/sys admin to
+configure apache2 (an alias file in /etc/apache2/conf.d) along with creating
+sysmlinks to some needed system libs.  Additional packages that are needed:
+
+	libapache2-mod-php5 or php5
+	php5-cli
+	php5-mysql
+	php5-xmlrpc
+	php-gettext
+	libjs-prototype
+	libnusoap-php
+	libphp-phpmailer
+	libphp-snoopy
+
+Users/sys admins will have to make the appropriate sysmlinks to the above
+mentioned packages for ampache to work properly.
+
+/etc/cron.daily/ampache =>
+/etc/ampache/ampache.cron.daily
+
+/etc/logrotate.d/ampache =>
+/etc/ampache/logrotate-ampache
+
+/usr/share/ampache/www/docs/CHANGELOG.gz =>
+/usr/share/doc/ampache/changelog.gz
+
+/usr/share/javascript/prototype/prototype.js =>
+/usr/share/ampache/www/modules/prototype/prototype.js
+
+/usr/share/php/libphp-snoopy/Snoopy.class.php =>
+/usr/share/ampache/www/modules/infotools/Snoopy.class.php
+
+/usr/share/php/libphp-phpmailer/class.phpmailer.php =>
+/usr/share/ampache/www/modules/phpmailer/class.phpmailer.php
+
+/usr/share/php/libphp-phpmailer/class.smtp.php =>
+/usr/share/ampache/www/modules/phpmailer/class.smtp.php
+
+/usr/share/php/nusoap/nusoap.php =>
+/usr/share/ampache/www/modules/nusoap/nusoap.php
+
+/usr/share/php/nusoap/nusoapmime.php =>
+/usr/share/ampache/www/modules/nusoap/nusoapmime.php
+
+/usr/share/php/nusoap/class.wsdlcache.php =>
+/usr/share/ampache/www/modules/nusoap/class.wsdlcache.php
+
+/usr/share/php/php-gettext/streams.php =>
+/usr/share/ampache/www/modules/php-gettext/streams.php
+
+XSPF JUKEBOX FLASH PLAYER NOTE:
+
+Currently the XSPF Jukebox Flash player has been removed until an appropriate
+solution can be found to compile xspf_jukebox.fla at build time.  
+
+To get the Flash player working you have three options. 
+
+a) in a terminal run :~$/bin/bash /usr/share/ampache/www/bin/get_xspf.sh
+
+b) Download the source from Lacy Morrows website 
+http://lacymorrow.com/projects/jukebox/source.zip
+unzip the source and place xspf_jukebox.swf into 
+/usr/share/ampache/www/modules/flash
+
+c) or checkout the bzr or git branches of ampache
+
+bzr branch lp:ampache
+or
+git://gitorious.org/ampache/ampache.git
+
+then place xspf_jukebox.swf into /usr/share/ampache/www/modules/flash
+This will allow the Flash player to work again.  Sorry for the inconvenience.
+
+APACHE2-MPM-ITK
+
+Apache2-mpm-itk has been added as a alternative web server that can be used
+with ampache.  As I feel is is not the maintainers responsibility to set the 
+UID/GID for the ampache VHost, it will be left up to the system administrator
+create the "group" and "user" the Ampache VHost will run under.
+
+INSTALLATION
+
+IMPORTANT:
+
+Ampache **REQUIRES** MySQL server to operate.  MySQL server is not installed 
+with Ampache due to the fact that if users are using an older version of 
+MySQL server upgrading to mysql-server may render their databases corrupt
+and possible useless.  So please upgrade your mysql server with **CAUTION**.
+For those who do not have mysql-server installed it is very easy to install.
+In the command line type:
+
+	Debian:  apt-get install mysql-server (as root)
+
+When installing mysql-server you will be asked to provide a new password for
+the root user.  Please provide one, and remember this, you will need it later
+to set up phpadmin (if so desired) and during ampache's web installation
+process.
+
+You can use the mysql root account to set up Ampache, however you can setup
+an additional mysql user account with global privileges which can be used to
+setup ampache if so desired.
+
+During phpmyadmins installation you will be asked to provide a password for
+the mysql administrative account, this is the password you created during 
+the installation of mysql.  
+
+WARNING
+
+Please insure that older versions of Apache-1.x or later are removed, before
+installing ampache or you will experience installation problems 
+**You have been warned**.
+
+GETTING STARTED WITH AMPACHE	
+
+SUMMARY
+	1.  MySQL Server install
+	2.  Phpmyadmin or command line setup of a MySQL server account with root
+	    privileges
+	3.  Step 1 Web Interface
+	4.  Step 2 Web Interface
+	5.  Step 3 Web Interface
+	6.  Sign in and start building music catalogs
+
+1.
+To install mysql-server follow instruction above.  If you already have
+mysql-server installed go to step 2.
+
+2.
+To setup Ampache you must have a user account on the mysql-server with root 
+privileges (you can use the root account).  If you prefer to setup an
+additional mysql account, you may do this by either the command line or
+with phpmyadmin.  I prefer phpmyadmin and that is what will be explained here.
+To install phpmyadmin type in the command line:
+
+	Debian: apt-get install phpmyadmin (as root)
+
+During phpmyadmins installation you will be asked to provide a password for
+the mysql administrative account, this is the password you created during 
+the installation of mysql.  
+
+To setup your mysql user account, sign into phpmyadmin by pointing your 
+browser to http://localhost/phpmyadmin or http://your.ip.address/phpmyadmin.
+
+username = root
+password = <password used during mysql-server install>
+
+This takes you to phpmyadmins main page, click on the "Privileges" tab.
+Scroll down to where it says "Add new User" and click on it.  This will take
+you to the "Add New User" page, please fill in the required information. 
+
+User name = what ever you want
+Host      = any host
+Password  = what ever you want
+Re-type   = retype your password again
+
+Now Scroll down a little and click on "Check All" for Global privileges.  Now
+scroll down to the bottom of the page and click the "Go" button.  Now sign
+out.
+
+3.
+Now point your browser to http://localhost/ampache or
+http://what.ever.your.ip.address.com/ampache. This will bring you to Ampache's
+Web Installation Interface (step 1)
+
+Desired Database Name = ampache (default)
+MySQL Hostname  = localhost (default)
+MySQL Administrative Username = root or the user name you setup with phpmyadmin
+MySQL Administrative Password = root password or the user password you created
+                                with phpmyadmin
+Create Database User For New Database = set check mark
+Ampache Database Username = ampache (default)
+Ampache Database User Password = set this to a password you like
+
+Click on Insert Database.
+
+4.  
+This will take you to Ampache's Web Installation Interface (step 2)
+
+Web Path	= /ampache
+Desired Database Name = ampache (default)
+MySQL Hostname  = localhost (default)
+MySQL Username  = this is the username you setup with phpmyadmin or root
+MySQL Password  = this is the password you setup with phpmyadmin or use the 
+                  root password
+
+Click on Write Config.
+
+Ampache will prompt you to download a file called "ampache.cfg.php".
+Download it to your favorite location.  Now take "ampache.cfg.php and copy it
+to /etc/ampache.  You will need to change the permissions of /etc/ampache,
+During install the permissions for /etc/ampache are set to 644.  Once you copy
+ampache.cfg.php to /etc/ampache don't forget to change the permissions back to
+644 for obvious security reasons.
+
+Now click on check for config, and everything should turn green.  Click on 
+next
+
+5.  
+This will take you to Ampache's Web Installation Interface (step 3).  Enter a 
+password, you will be using this to initially sign into ampache.  You can 
+change the admin username and password after the install is complete through
+the preferences tab
+
+Click next this will take you to Ampache's log in screen
+
+Enter Admin and the password you entered in the above step.
+
+6.  
+You are now ready to start adding music and building your music catalogs.
+
+CREATING A CATALOG
+
+Catalogs are the core of Ampache. They are a logical container for all of your
+music files and other records. There are two main types of catalogs currently
+in Ampache, Remote and Local. Remote catalogs are only for use with XML-RPC 
+and reference other Ampache servers. Local catalogs reference a base directory
+on the local file system of the server. To create your first Catalog login to
+Ampache as an administrator and go to the Admin Menu and click on Add a 
+Catalog.
+
+Local Catalog Settings
+
+    * Path -- This is a directory located on the computer Ampache is running 
+      on this can be a NFS mount, Windows Network drive etc. This is the full
+	  path, not a relative one.
+    * File Pattern -- This defines the pattern that Ampache will use when
+	  attempting to read filenames for tag information, it also defines how
+	  ampache will sort/rename files in this collection
+    * Path Pattern -- This defines the directory structure starting from the
+	  Path of the catalog up to the filenames, again used for tag information
+	  on read and sort/rename
+    * Album Art -- This option defines which methods to use when collecting
+	  Album Art, some methods may require additional configuration
+    * Build Play lists from M3u's -- This options tells Ampache to look for 
+      .m3u's in your catalog and attempts to parse and create play lists based
+	  on them.
+
+CONFIGURING AMPACHE
+
+Ampache's main configuration file is located at /etc/ampache/ampache.cfg.php
+and is symbolically linked to /usr/share/ampache/www/config/ampache.cfg.php.
+Please have a look at ampache.cfg.php as there a numerous config options that
+are available which are not available in the web interface.
+
+WEB INTERFACE CONFIG OPTIONS
+
+Interface.
+
+This section contains all of the preferences directly relating to the 
+interface and how Ampache looks.
+
+Popular Threshold: This setting determines how many Top artists, Top Albums,
+Statistics, Recently Played Tracks are listed throughout the interface. Larger
+numbers can increase load times as more data has to be displayed on any one 
+page.  The Default is 10.
+
+Language : Ampache is translated into many different languages using GETTEXT,
+this is a list of all current translations. At any one moment some of the
+strings may be missing from any one of the translations. If you would like to
+fix a missing string or contribute a new language please read
+svn.ampache.org/trunk/locale/base/TRANSLATIONS
+
+Theme : This sets the them for the current user. Ampache reads the /themes
+directory for a listing of all current installed themes. For more information
+on creating a theme see the Forums
+
+Album Ellipse Threshold, Artist Ellipse Threshold, Title Ellipse Threshold:
+These define how many letters, numbers, etc are displayed before a 
+ellipse (...) is appended to the name and it is truncated. The truncation 
+prevents interface distortion due to very long names.
+
+Min Album Size: This defines the smallest album that will be viewable when
+Browsing by Album. This can effectively hide a large portion of your music so
+be careful. The default value is 0.
+
+Statistics Day Threshold: This defines how many days are used to build the
+statistical displays in Ampache. Because the counts can get meaningless over
+the long periods of time, as it becomes impossible for new albums to ever make
+it near the top of the list you can limit the number of previous days used.
+The default value is 7, or one week.
+
+Streaming
+
+This section defines how Ampache streams your Music.
+
+Transcode Bitrate : This defines the bitrate you would like Ampache to attempt
+to transcode at. The default is 32kbps
+
+Type of Playback : This is one of the most important options. It appears on 
+the menu as well as a drop down. This defines what Ampache is to do with the 
+music that is to be streamed. The default is Stream, other options include 
+Localplay, Democratic, Downsampling, XSPF Flash
+
+Transcoding: This defines the transcoding behavior of Ampache.
+
+Playlists
+
+Playlist Type: This defines what type of Playlist is generated by Ampache on
+play. Different applications work better with different playlist types. The
+default is M3u. This option has no effect in XSPF Flash, Democratic and
+Localplay Playback types.
+
+Playlist Method: This defines the behavior of the Play and Add actions in
+Ampache.
+
+Options
+
+This sections contains preferences for different features that can be enabled,
+disabled within Ampache.
+
+Allow Downloads : If this is enabled then you can download individual songs by
+clicking on their download link. If you have allow zip downloads in the config
+file this Option will also enable the Full Album, Full Artist, Selected,
+Playlist downloads. Default is disabled.
+
+Allow Direct Links : This puts a raw 'stream' URL link on every song line. 
+This can be used to effectively enqueue songs by dragging the raw URL into
+your audio player. This is also disabled by default.
+
+Localplay Access Level : This defines what type of access you have to 
+Localplay.  Global tells Ampache to use the settings defined in 
+Admin --> Config for this user and to ignore any locally set settings. Local 
+tells Ampache to first check the local settings. If they do not exist then 
+fall back on the global settings.  Disabled prevents all access to Localplay, 
+this is the default value.
+
+System
+
+This section is only visible to Administrators and pertains to non-user 
+options that often affect Ampache's operation as a whole, but are not deemed 
+to be a security risk and thus are allowed to be in the Interface.
+
+Website Title : This defines the Website Title for your Ampache site, the
+default is "Ampache :: Pour l'Amour de la Musique"
+(Ampache :: For the Love of Music).
+
+Lock Songs : When enabled this prevents any two users from listening to the
+exact same song at the exact same time. This is a quasi legalize feature meant
+to simulate a shared pile of CD's in an office. Default is off
+
+Forces Http play regardless of port : This tells Ampache to always send HTTP 
+in its playlists regardless of what the client is providing. This is enabled 
+by default because a vast majority of players can not play HTTPS streams.
+
+Non-Standard Http Port : If defined this tells ampache to overwrite the 
+current port and always use this port when building the stream URLs. 
+Default 80
+
+Catalog Echo Interval : This specifies the number of elements between 
+refreshes during Catalog builds. The default is 100, so ever 100 songs it will
+update the count. It is recommended that you leave this rather high as a low 
+interval with a large catalog can produce large pages, and extra time is 
+spending rendering the count rather then actually working on cataloging your 
+music.
+
+Allow Downsampling, Allow Streaming, Allow Democratic Play,
+Allow Localplay Play : These options control which play types are currently
+allowed. Streaming is the only one enabled by default as all other options
+require additional configuration on the part of the administrator.
+
+Modules
+
+This is a list of the current Localplay Modules and Plugins that you can 
+enable and disable. These Plugins and Modules may add additional preferences 
+to Ampache which are not defined here. Catalog Updates will not be performed 
+if there are any non-official Plugins currently installed.
+
+For installation question and/or questions on how to enable additional
+features in ampache please visit the forums, wiki and IRC
+
+http://ampache.org/wiki/
+http://ampache.org/forums/
+http://ampache.org/bugs/
+https://svn.ampache.org
+IRC Freenode #ampache
+
+For .deb daily builds of ampache please have a look at:
+
+https://edge.launchpad.net/~cjsmo/+archive/ppa
+
+ -- Charlie Smotherman <cjsmo@cableone.net>  Tue,  27 Apr 2010 09:30:14 -0500

@@ -1,0 +1,68 @@
+# Danish translation ampache.
+# Copyright (C) 2010 ampache & nedenstående oversættere.
+# This file is distributed under the same license as the ampache package.
+# Joe Hansen <joedalton2@yahoo.dk>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ampache\n"
+"Report-Msgid-Bugs-To: ampache@packages.debian.org\n"
+"POT-Creation-Date: 2012-05-24 09:56-0500\n"
+"PO-Revision-Date: 2010-09-01 23:51+0200\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
+"Language-Team: Danish <debian-l10n-danish@lists.debian.org> \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: boolean
+#. Description
+#: ../ampache.templates:2001
+msgid "Configure and restart the web server?"
+msgstr "Konfigurer og genstart internetserveren?"
+
+#. Type: boolean
+#. Description
+#: ../ampache.templates:2001
+msgid ""
+"The web server needs to be reconfigured and restarted to enable Ampache. "
+"Please choose whether you want to restart it automatically now or do it "
+"yourself later."
+msgstr ""
+"Internetserveren skal rekonfigureres og genstartes for at aktivere Ampache. "
+"Vælg venligst hvorvidt du ønsker at genstarte Ampache automatisk nu eller "
+"selv gøre det senere."
+
+#. Type: boolean
+#. Description
+#: ../ampache.templates:2001
+msgid ""
+"To manually restart the web server, use one of the following commands: \"/"
+"etc/init.d/apache2 restart\" or \"/etc/init.d/lighttpd restart\""
+msgstr ""
+"For manuelt at genstarte internetserveren, brug en af de følgende "
+"kommandoer: »/etc/init.d/apache2 restart« eller »/etc/init.d/lighttpd "
+"restart«"
+
+#~ msgid "apache2"
+#~ msgstr "apache2"
+
+#~ msgid "lighttpd"
+#~ msgstr "lighttpd"
+
+#~ msgid "Web server to configure automatically:"
+#~ msgstr "Internetserver at konfigurere automatisk:"
+
+#~ msgid ""
+#~ "Please select the web server to be configured automatically for Ampache."
+#~ msgstr ""
+#~ "Vælg venligst internetserveren der skal konfigureres automatisk for "
+#~ "Ampache."
+
+#~ msgid ""
+#~ "Apache2 and Lighttpd are the only supported web servers for automatic "
+#~ "configuration."
+#~ msgstr ""
+#~ "Apache2 og Lighttpd er de eneste understøttede internetservere til "
+#~ "automatisk konfiguration."

@@ -1,0 +1,67 @@
+# The Dutch translation of Ampache.
+# Copyright (C) 2007-2012 Ampache.org
+# This file is distributed under the same license as the Ampache package.
+# Bart Cornelis <cobaco@skolelinux.no>, 2007.
+# Jeroen Schot <schot@a-eskwadraat.nl>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ampache 3.6-alpha1+dfsg-2\n"
+"Report-Msgid-Bugs-To: ampache@packages.debian.org\n"
+"POT-Creation-Date: 2012-05-24 09:56-0500\n"
+"PO-Revision-Date: 2012-02-03 18:00+0100\n"
+"Last-Translator: Jeroen Schot <schot@a-eskwadraat.nl>\n"
+"Language-Team: Debian l10n Dutch <debian-l10n-dutch@lists.debian.org>\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: boolean
+#. Description
+#: ../ampache.templates:2001
+msgid "Configure and restart the web server?"
+msgstr "De webserver configureren en herstarten?"
+
+#. Type: boolean
+#. Description
+#: ../ampache.templates:2001
+msgid ""
+"The web server needs to be reconfigured and restarted to enable Ampache. "
+"Please choose whether you want to restart it automatically now or do it "
+"yourself later."
+msgstr ""
+"Om Ampache te activeren dient de webserver herstart te worden. Wilt u deze "
+"nu automatisch laten herstarten, of wilt u dit later zelf te doen?"
+
+#. Type: boolean
+#. Description
+#: ../ampache.templates:2001
+msgid ""
+"To manually restart the web server, use one of the following commands: \"/"
+"etc/init.d/apache2 restart\" or \"/etc/init.d/lighttpd restart\""
+msgstr ""
+"Gebruik een van de volgende commando's om de webserver handmatig te "
+"herstarten: \"/etc/init.d/apache2 restart\" of \"/etc/init.d/lighttpd restart"
+"\""
+
+#~ msgid "apache2"
+#~ msgstr "apache2"
+
+#~ msgid "lighttpd"
+#~ msgstr "lighttpd"
+
+#~ msgid "Web server to configure automatically:"
+#~ msgstr "Automatisch te herconfigureren webserver:"
+
+#~ msgid ""
+#~ "Please select the web server to be configured automatically for Ampache."
+#~ msgstr ""
+#~ "Welke webserver moet automatisch worden geconfigureerd voor Ampache?"
+
+#~ msgid ""
+#~ "Apache2 and Lighttpd are the only supported web servers for automatic "
+#~ "configuration."
+#~ msgstr ""
+#~ "Apache2 en Lighttpd zijn de enige twee webservers waarvoor automatische "
+#~ "configuratie wordt ondersteund."

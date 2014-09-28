@@ -1,0 +1,64 @@
+# Japanese translation of ampache debconf templates.
+# Copyright (C) 2009,2010 Hideki Yamane <henrich@debian.org>
+# This file is distributed under the same license as ampache package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ampache 3.5.4-4\n"
+"Report-Msgid-Bugs-To: ampache@packages.debian.org\n"
+"POT-Creation-Date: 2012-05-24 09:56-0500\n"
+"PO-Revision-Date: 2010-07-31 12:52+0900\n"
+"Last-Translator: Hideki Yamane <henrich@debian.org>\n"
+"Language-Team: Japanese <debian-japanese@lists.debian.org>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: boolean
+#. Description
+#: ../ampache.templates:2001
+msgid "Configure and restart the web server?"
+msgstr "ウェブサーバを再起動しますか?"
+
+#. Type: boolean
+#. Description
+#: ../ampache.templates:2001
+msgid ""
+"The web server needs to be reconfigured and restarted to enable Ampache. "
+"Please choose whether you want to restart it automatically now or do it "
+"yourself later."
+msgstr ""
+"Ampache を有効にするにはウェブサーバを再設定して再起動する必要があります。今"
+"すぐ自動的に再起動するか、あるいは後で手動で行うかを選んでください。"
+
+#. Type: boolean
+#. Description
+#: ../ampache.templates:2001
+msgid ""
+"To manually restart the web server, use one of the following commands: \"/"
+"etc/init.d/apache2 restart\" or \"/etc/init.d/lighttpd restart\""
+msgstr ""
+"手動でウェブサーバを再起動するには、以下のコマンドのいずれかを実行してくださ"
+"い:「/etc/init.d/apache2 restart」または「/etc/init.d/lighttpd restart」"
+
+#~ msgid "apache2"
+#~ msgstr "apache2"
+
+#~ msgid "lighttpd"
+#~ msgstr "lighttpd"
+
+#~ msgid "Web server to configure automatically:"
+#~ msgstr "自動的に設定するウェブサーバ:"
+
+#~ msgid ""
+#~ "Please select the web server to be configured automatically for Ampache."
+#~ msgstr "Ampache に合わせて自動的に設定するウェブサーバを選択してください。"
+
+#~ msgid ""
+#~ "Apache2 and Lighttpd are the only supported web servers for automatic "
+#~ "configuration."
+#~ msgstr "自動的設定が可能なウェブサーバは Apache 2 と lighttpd のみです。"
+
+#~ msgid "Configure Apache 2 web server for use with Ampache?"
+#~ msgstr "Ampache を使うように Apache 2 ウェブサーバを設定しますか?"

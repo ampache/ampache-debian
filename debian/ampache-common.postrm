@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "remove" ] || [ "$1" = "purge" ]; then
+	if [ -e /usr/share/ampache ]; then
+		rm -rf /usr/share/ampache
+	fi
+fi
+
+#DEBHELPER#
+
+exit 0

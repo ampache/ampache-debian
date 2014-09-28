@@ -1,0 +1,71 @@
+# Translation of ampache debconf template to Swedish
+# Copyright (C) 2010 Martin Bagge <brother@bsnet.se>
+# This file is distributed under the same license as the ampache package.
+#
+# Martin Bagge <brother@bsnet.se>, 2008, 2010
+msgid ""
+msgstr ""
+"Project-Id-Version: ampache_3.4-2_templates\n"
+"Report-Msgid-Bugs-To: ampache@packages.debian.org\n"
+"POT-Creation-Date: 2012-05-24 09:56-0500\n"
+"PO-Revision-Date: 2010-05-22 23:06+0100\n"
+"Last-Translator: Martin Bagge <brother@bsnet.se>\n"
+"Language-Team: Swedish <debian-l10n-swedish@lists.debian.org>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"X-Poedit-Language: Swedish\n"
+"X-Poedit-Country: Sweden\n"
+
+#. Type: boolean
+#. Description
+#: ../ampache.templates:2001
+msgid "Configure and restart the web server?"
+msgstr "Gör inställningar och starta om webbservern?"
+
+#. Type: boolean
+#. Description
+#: ../ampache.templates:2001
+msgid ""
+"The web server needs to be reconfigured and restarted to enable Ampache. "
+"Please choose whether you want to restart it automatically now or do it "
+"yourself later."
+msgstr ""
+"Webbservern måste startas om för att aktivera Ampache. Vänligen välj om du "
+"vill starta om den automatiskt nu eller göra det manuellt vid ett senare "
+"tillfälle."
+
+#. Type: boolean
+#. Description
+#: ../ampache.templates:2001
+msgid ""
+"To manually restart the web server, use one of the following commands: \"/"
+"etc/init.d/apache2 restart\" or \"/etc/init.d/lighttpd restart\""
+msgstr ""
+"För att manuellt starta om webbservern använde ett av följande kommandon. \"/"
+"etc/init.d/apache2 restart\" eller \"/etc/init.d/lighttpd restart\""
+
+#~ msgid "apache2"
+#~ msgstr "apache2"
+
+#~ msgid "lighttpd"
+#~ msgstr "lighttpd"
+
+#~ msgid "Web server to configure automatically:"
+#~ msgstr "Webbserver att ställa in automatiskt:"
+
+#~ msgid ""
+#~ "Please select the web server to be configured automatically for Ampache."
+#~ msgstr "Ange den webbserver som automatiskt ska förberedas för Ampache."
+
+#~ msgid ""
+#~ "Apache2 and Lighttpd are the only supported web servers for automatic "
+#~ "configuration."
+#~ msgstr ""
+#~ "Apache2 och Lighttpd är de ena webbservrarna som kan ställas in "
+#~ "automatiskt."
+
+#~ msgid "Configure Apache 2 web server for use with Ampache?"
+#~ msgstr "Konfigurera Apache 2 att fungera med Ampache?"

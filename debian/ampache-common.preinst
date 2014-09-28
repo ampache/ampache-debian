@@ -1,0 +1,32 @@
+#!/bin/sh
+
+set -e
+
+USAW="/usr/share/ampache/www"
+
+#make sure these folders are empty so dh_linktree can due it's magic.
+if [ "$1" = "upgrade" ]; then
+	if [ -d $USAW/modules/prototype ]; then
+		rm -rf $USAW/modules/prototype/*
+	fi
+	if [ -d $USAW/modules/snoopy ]; then
+		rm -rf $USAW/modules/snoopy/*
+	fi
+	if [ -d $USAW/modules/phpmailer ]; then
+		rm -rf $USAW/modules/phpmailer/*
+	fi
+	if [ -d $USAW/modules/php-gettext ]; then
+		rm -rf $USAW/modules/php-gettext/*
+	fi
+	if [ -d $USAW/modules/getid3 ]; then
+		rm -rf $USAW/modules/getid3/*
+	fi
+fi
+
+#DEBHELPER#
+
+exit 0
+
+
+
+

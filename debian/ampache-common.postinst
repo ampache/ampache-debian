@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -e
+
+#remove old files if they exist.  The interface has changed for apache2.4
+#so these files are not needed. 
+if [ -e /etc/apache2/sites-enabled/ApacheAmpache ]; then
+   	rm -f /etc/apache2/sites-available/ApacheAmpache
+elif [ -e /etc/apache2/sites-enabled/ampvhadd ]; then
+	rm -f /etc/apache2/sites-available/ampvhadd
+else
+	printf "ac_postinst: Vhost not present, nothing to do\n"
+fi
+
+#DEBHELPER#
+
+exit 0

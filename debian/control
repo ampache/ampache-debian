@@ -1,0 +1,78 @@
+Source: ampache
+Section: web
+Priority: optional
+Maintainer: Afterster <afterster@gmail.com>
+Build-Depends: debhelper (>= 8.1.0),
+ xz-utils,
+ po-debconf,
+ apache2-dev,
+ ucf,
+ dh-linktree,
+ libjs-jquery,
+ libjs-jquery-jplayer,
+ libjs-jquery-cookie,
+ libjs-jquery-ui,
+ php-gettext,
+ libphp-phpmailer,
+ ttf-freefont,
+ php-getid3,
+ php-openid
+Standards-Version: 3.9.4
+Vcs-Git: https://github.com/ampache/ampache.git
+Vcs-browser: https://github.com/ampache/ampache
+Homepage: http://www.ampache.org
+
+Package: ampache
+Architecture: all
+Pre-Depends: dpkg (>= 1.15.7.2)
+Depends: ${misc:Depends},
+ debconf (>= 0.5) | debconf-2.0,
+ libapache2-mod-php5 | php5,
+ ampache-common (>= 3.7.1),
+ php5-cli,
+ php5-mysql,
+ php5-xmlrpc,
+ php5-json,
+ ucf
+Replaces: ampache (<< 3.7.1)
+Breaks: ampache (<< 3.7.1)
+Recommends: ${misc:Recommends}, php5-curl, apache2 | httpd,
+Suggests: php5-gd, phpmyadmin, mysql-server, eyed3, faad, ffmpeg, vorbis-tools
+Description: web-based audio file management system
+ Ampache is a web-based audio file manager implemented with PHP and
+ MySQL which allows viewing, editing, and playing audio files via the
+ web. It has support for playlists, artist and album views, album art,
+ random or vote-based play and per-user play-tracking/theming.
+ Playback may be via HTTP, on-the-fly transcoding and downsampling,
+ Mpd/Icecast, or integrated Flash player. Multiple Ampache servers can
+ be linked together using XML-RPC. The software is fully localized in many
+ languages.
+
+Package: ampache-common
+Architecture: all
+Depends: ${misc:Depends},
+ php-gettext,
+ libjs-jquery,
+ libjs-jquery-cookie,
+ libjs-jquery-jplayer,
+ libjs-jquery-ui,
+ libphp-phpmailer,
+ ttf-freefont,
+ php-getid3 (>= 1.9.5),
+ php-openid
+Replaces: ampache (<< 3.7.1)
+Breaks: ampache (<< 3.7.1)
+Suggests: ampache, php5-gd, phpmyadmin, mysql-server, eyed3, faad, ffmpeg, vorbis-tools
+Description: web-based audio file management system common files
+ This package provides common files for Ampache. This package is server
+ independent and is intended for users who wish to use other web servers, 
+ virtual enviroments, or LXC's to deploy Ampache.
+ .  
+ Ampache is a web-based audio file manager implemented with PHP and
+ MySQL which allows viewing, editing, and playing audio files via the
+ web. It has support for playlists, artist and album views, album art,
+ random or vote-based play and per-user play-tracking/theming.
+ Playback may be via HTTP, on-the-fly transcoding and downsampling,
+ Mpd/Icecast, or integrated Flash player. Multiple Ampache servers can
+ be linked together using XML-RPC. The software is fully localized in many
+ languages.

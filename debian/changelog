@@ -1,0 +1,710 @@
+ampache (3.7.1-1) UNRELEASED; urgency=low
+
+  * New upstream snapshot
+  * Switch to dpkg-source 3.0 (quilt) format
+
+ -- Afterster <afterster@gmail.com>  Sun, 28 Sep 2014 15:03:48 +0200
+
+ampache (3.6-rzb2752+dfsg-3) unstable; urgency=low
+
+  * Added php5-json to ampache depends.
+  * Updated ampache, ampache-common Replace and Breaks fields with new 
+    version.
+  * Have ucf actually track the ampache.conf file and not the symlink.
+    Closes: #722548
+  * Rebuild package against php-getid3-1.9.7.  Closes: #728601
+
+ -- Charlie Smotherman <cjsmo@cableone.net>  Wed, 06 Nov 2013 04:22:02 -0500
+
+ampache (3.6-rzb2752+dfsg-2) unstable; urgency=low
+
+  * Neglected to update ampache-common Replace and Breaks fields. 
+    Closes: #722561
+  * Updated ampache.postrm ucf call to use the --force --purge options so the
+    new package in ampache-common Replace/Breaks field can claim the new
+    conf file on upgrades.  Closes: #722548 
+
+ -- Charlie Smotherman <cjsmo@cableone.net>  Thu, 12 Sep 2013 12:45:12 -0500
+
+ampache (3.6-rzb2752+dfsg-1) unstable; urgency=low
+
+  * New upsteam snapshot.  Contains important bug fixes to the installer.
+  * Correct typo in ampache-common.postrm.
+  * Remove courtousy copy of php-getid3, during repack.  Closes: #701526
+  * Update package to use dh_linktree to make the needed sym links to the
+    needed system libs that were removed during repack.
+  * Update debian/rules to reflect upstreams removing/moving of modules.
+  * Update debian/ampache-common.install to reflect upstreams removal of files.
+  * Updated to use new apache2.4 API. Closes: #669756
+  * Updated /debian/po/de.po thx David Prévot for the patch.  Closes:  #691963
+  * M3U import is now ordered, fixed upstream.  Closes: #684984
+  * Text input area has been resized so IPv6 addresses will now fit, fixed
+    upstream.  Closes:  #716230
+  * Added ampache-common.preinst to make sure that the courtousy copies of code
+    dirs are empty so dh_linktree can do it's magic on upgrades.
+
+ -- Charlie Smotherman <cjsmo@cableone.net>  Tue, 27 Aug 2013 13:19:48 -0500
+
+ampache (3.6-git408e713+dfsg-3.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Remove generated link in prerm.  Closes: #688436
+
+ -- Bas Wijnen <wijnen@debian.org>  Sun, 14 Oct 2012 16:31:58 +0200
+
+ampache (3.6-git408e713+dfsg-3) unstable; urgency=low
+
+  * Remove statements in debian/ampache.postrm that manually remove conffiles,
+    log files on remove and purge.  Closes: #688436
+
+ -- Charlie Smotherman <cjsmo@cableone.net>  Sat, 22 Sep 2012 14:24:41 -0500
+
+ampache (3.6-git408e713+dfsg-2) unstable; urgency=low
+
+  * Added functions to ampache.postrm so it is formated similar to 
+    ampache.posinst.
+  * Moved "service apache2 reload" into a conditional if statement in
+    debian/ampache.postinst and debian/ampache.postrm, which runs if
+    /var/run/apache2.pid is present.  Closes: #676451
+
+ -- Charlie Smotherman <cjsmo@cableone.net>  Thu, 07 Jun 2012 00:48:12 -0500
+
+ampache (3.6-git408e713+dfsg-1) unstable; urgency=low
+
+  * New upstream git snapshot, using commit 
+    408e71344ade84685c181cd326e2ec5e79c9157b Closes: #668932, #668936
+  * Prep for apache2.4 transition.
+  * Removed files ApacheAmpache, lighttpd_ampache.conf, mythbuntu.ampache.conf
+    and vhost, they are no longer needed.
+  * Added debain/conf/ampache.conf to be more inline with the apache2.4
+    transition.  This required a rewrite of the postinst, postrm, and preinst.
+    Closes: #668639, #656553 LP: #996507
+  * Split package into ampache and ampache-common.  Ampache behaves the same 
+    and installs the apache2 web server, as where ampache-common will not.
+    This will allow users to deploy ampache on other web servers if they wish.
+    Removed support for lighttpd and mythbuntu as I do not feel comfortable
+    supporting web servers I no longer use.  Closes: #666005
+  * Removed debconf question from ampache.config and ampache.templates,
+    updated po files with debconf-updatepo.
+  * Updated README.Debian to mention the package split.
+  * Removed cruft from debian/rules and updated get-orig-source to retrieve
+    source files from upstreams git repo.  Added additional rules to remove
+    embedded copies of code and nonfree fonts.  Disabled debian/watch.
+  * debian/control added ampache-common binary stanza and adjusted
+    dependencies to remove mythbuntu and lighttpd support.  Added php-gettext
+    to dependencies as upstream now uses it.
+  * Update debian/copyright with the fresh theme copyright info, udated 
+    header information. Added missing CC-BY-3.0 license field.  Corrected
+    typo's. 
+
+ -- Charlie Smotherman <cjsmo@cableone.net>  Thu, 31 May 2012 15:25:52 -0500
+
+ampache (3.6-alpha1+dfsg-3) unstable; urgency=low
+
+  * Removed dependency on php5-auth-pam as it is being removed from the archive
+    due to non maintenance, refer to bug 663694 for more information.
+    Closes: #663005
+  * Added new nl.po translation file.  Update po files with debconf-updatepo.  
+    Thx Jeroen Schot Closes: #658515
+  * Updated debian/copyright with new nl.po copyright info.
+  * Remove Vcs fields as the urls point to ampache trunk and not to packaging
+    branches.
+  * Corrected syntax error in debian/ampache.templates.
+  * Increased Standards Version to 3.9.3 no changes needed.
+
+ -- Charlie Smotherman <cjsmo@cableone.net>  Tue, 13 Mar 2012 23:19:11 -0500
+
+ampache (3.6-alpha1+dfsg-2) unstable; urgency=low
+
+  * Use conditional statements to create the "$sa", "$se", "$ea", "$confd"
+    variables in ampache.postinst.  These vars are only needed if Apache2 is
+    installed and no attempt should be made to create them when using lighttpd.
+    Thx Matt Wheeler for the bug report. Closes: #640530
+  * Added additional check in mythbuntu_apache_install to check for the
+    presents of the needed symlink so mythbuntu upgrades do not fail. Thx Bill
+    Walker for the bug report. (LP: #874142 #880654)
+  * Corrected line lengths in changelog to correct lintian warning.
+  * Added exclude statements to dh_install to not install extra license files,
+    as reported by lintian.
+  * Removed install statement from debian/ampache.install so a duplicate copy
+    of the upstream changelog is not installed as reported by lintian.
+  * Reformatted Variables print statement in debian/ampache.postinst. 
+
+ -- Charlie Smotherman <cjsmo@cableone.net>  Sat, 17 Sep 2011 22:27:14 -0500
+
+ampache (3.6-alpha1+dfsg-1) unstable; urgency=low
+
+  * New upstream release.
+  * Upstream has removed php-pear/xmp-rpc and has changed the source code to
+    use the internal xml-rpc capabilities of php.  Closes: #631130
+  * Upstream has changed the source code so ampache now provides more relevent
+    information in the log files.  This includes removing/correcting depeciated
+    php functions.  Closes: #636438, #624221, #611785
+  * Added postrotate rule to ampache.logrotate to correct ownership of 
+    var/log/ampache after the logs are rotated. (LP: #722274)
+  * added /debian/scripts directory, and moved grab_xspf.sh into it.
+  * debian/po
+    - added updated da.po translations file.  Thx Joe Dalton for the bug
+      report. Closes: #595197
+    - added updated nl.po translations file.  Thx Jeroen Schot for the bug
+      report. Closes: #637503
+  * debian/dirs
+    - removed /usr/share/ampache/www/modules/pearxmlrpc no longer needed.
+    - added /var/log/ampache/old to contain the old rotated logs.
+  * debian/ampache.conf
+    - removed unused variables
+    - removed debconf db versioning, not need.
+  * debian/ampache.install
+    - reorganized for easier readability.
+    - updated debian/ampache.install to install favicon.ico.
+  * debian/ampache.postinst
+    - added additional checks and logic to verify if ampache.conf,
+      ApacheAmpache, ampvhadd, or 000-default are being used to provide the
+      Ampache alias, and installs Ampache accordingly. Default is to use
+      ApacheAmpache.
+    - added additional comments.
+    - removed debconf db versioning, not needed.
+  * debian/ampache.preinst
+    - removed ampache.conf removal.
+    - removed unused variables.
+  * debian/control
+    - update Standards Version to 3.9.2 no changes needed.
+    - added php5-xmlrpc and libphp-phpmailer to depends.
+    - added apache2-mpm-itk as alternate recommends. (LP: #826443)
+    - reorganized depends field.
+    - removed lame and mp3-splt from suggests so ampaches dependencies can be
+      satisfied on kfreebsd-amd64, mips, s390, alpha, hppa, kfreebsd-i386,
+      powerpc, ia64, mipsel, sparc, amd64, armel, i386.
+  * debian/copyright
+    - corrected the word File to be Files per DEP5 spec.
+    - corrected spacing in copyright notices per DEP5 spec.
+    - removed PHP License, upstream has removed php-pear/xml-rpc.
+  * debian/links
+    - reorganized into groups for easier readability.
+    - added link to link /usr/share/logrotate.d/ampache to /etc/ampache so
+      usr/sysadmin can easily customize the rotation to their needs.
+  * debian/rules
+    - added get-orig-source.  This repacks the .orig.tar.gz to remove unwanted
+      *.swf files along with convienent copies of code that will be excluded 
+      during package build anyway.
+    - removed dh_install excludes from debian/rules.
+  * debian/patches
+    - Removed xspf_notification.patch it has been included upstream.
+    - Updated logratate_fix patch for new upstream code.
+  * debian/README.Debian
+    - added blob about apache2-mpm-itk.
+    - updated the bzr and git repo references.
+
+ -- Charlie Smotherman <cjsmo@cableone.net>  Sun, 14 Aug 2011 22:23:54 -0500
+
+ampache (3.5.4-11) unstable; urgency=low
+
+  * Made package check the md5sum of /etc/apache2/sites-available/default for
+    any local changes.  If changes have been made a copy is made and the
+    ampache alias is added to the newly created virtualhost.  If no changes
+    are detected, the ApacheAmpache virtualhost is used instead.  This should
+    capture any changes made by the local usr/sysadmin.  Closes: #612703
+
+ -- Charlie Smotherman <cjsmo@cableone.net>  Wed, 16 Feb 2011 09:55:24 -0500
+
+ampache (3.5.4-10) unstable; urgency=low
+
+  * Made package use a VirtualHost instead of adding alias symlink to 
+    /etc/apache2/conf.d
+  * Added /conf/ApacheAmpache.
+  * Updated postinst and postrm to use a2ensite and a2dissite.
+  * Updated ampache.install to install ApacheAmpache into 
+    /etc/apache2/sites-available.
+  * Removed "for" loop in debian/ampache.postinst debian/ampache.postrm.
+    Thx pitti
+  * Recreated /usr/share/ampache/www/modules/pearxmlrpc dir in debian/dir.
+  * Made package depend on the correct php-xml-rpc package in debian/control.
+    Moved eyed3 to the Suggests field, along with adding lame, faad, 
+    mp3-splt, vorbis-tools to the Suggest field. LP: #681932 
+  * Created the needed symlinks to php-xml-rpc in debian/links.
+  * Corrected spacing in debian/ampache.preinst, added webserver reload,
+    added comments.
+  * Corrected spacing in ampache.postinst, changed from using webserver
+    restart to using webserver reload, added comments.
+  * Removed init_php_fix patch as it is no longer needed, refreshed patches.
+  * Added discription headers to patch files.
+  * debian/patches/xspf_notification.patch: If the user attempts to use the
+    xspfflash player, the user will be pointed to 
+    /usr/share/doc/ampache/README.Debian for details and a work around.
+  * Included /config/mythbuntu_ampache.conf so webserver is configured
+    correctly with Mythbuntu.
+  * Reworked ampache.install, ampache.postinst and ampache.postrm for use on
+    mythbuntu.
+  * Reworked ampache.postinst and ampache.postrm so if the user chooses not to
+    restart the webserver ampache will exit gracefully.
+  * Setup dirs and permissions for logging in ampache.postinst and
+    ampache.postrm, so all the user has to do is turn it on in ampache.cfg.php.
+  * Added ampache.logrotate so if logging is turned on the logs will be
+    rotated daily, and logs older than 7 days old will be deleted.
+  * Added grab_xspf.sh to /usr/share/ampache/www/bin.  This is a simple bash
+    script that grabs xspf_jukebox source and places xspf_jukebox.swf in
+    /usr/share/ampache/www/modules/flash.  This gives the user an opt in
+    choice to using the xspf flash player.
+  * Updated debian/ampache.install to install grab_xspf.sh into 
+    /usr/share/ampache/www/bin.
+  * Updated Vcs fields to reflect new git repository.  
+
+ -- Charlie Smotherman <cjsmo@cableone.net>  Mon, 07 Feb 2011 04:52:44 -0500
+
+ampache (3.5.4-9) unstable; urgency=low
+
+  * Actually added updated cs.po. Thx Miroslav Kure for the mail.
+  * Added vi.po.  Thx Clytie Siddall.  Closes: #599153
+
+ -- Charlie Smotherman <cjsmo@cableone.net>  Tue, 26 Oct 2010 20:19:24 -0500
+
+ampache (3.5.4-8) unstable; urgency=low
+
+  * Made requested changes from the Release Team (Adam) to ampache.config
+    postinst, and postrm to fix symlink creation.  Closes: #593759
+  * Made the requested spacing changes from the Release Team (Adam) in the
+    postrm.
+  * Added updated it.po. Thx  Luca Monducci Closes: #593959
+  * Added updated ta.po. Thx Dr.T.Vasudevan
+  * Added updated cs.po. Thx Miroslav Kure Closes: #595512
+  * Added zh_TW.po.  Thx Kan-Ru Chen
+  * Added da.po.  Thx Joe Dalton Closes: #595197
+
+ -- Charlie Smotherman <cjsmo@cableone.net>  Tue, 21 Sep 2010 21:34:54 -0500
+
+ampache (3.5.4-7) unstable; urgency=high
+
+  * Adjusted symlink creation in debian/postinst so it now works.
+    Closes: #593181
+  * Upstream neglected to comment out the "require once" for
+    /modules/pearxmlrpc/rpc.php which causes the inital login after the 
+    completion of the web installer to fail due to php not being able to find
+    /modules/pearxmlrpc/rpc.php.  Closes: #593182
+
+ -- Charlie Smotherman <cjsmo@cableone.net>  Sun, 17 Aug 2010 06:51:29 -0500
+
+ampache (3.5.4-6) unstable; urgency=high
+
+  * Setting urgency to high as this fixes an RC bug.
+  * Upstream has decided to remove pearxmlrpc and make the package
+    depend on php5-xmlrpc. Closes: #591984
+  * debian/control
+    - added php5-xmlrpc to Depends field.
+  * debian/rules
+    - added -X option to remove /modules/pearxmlrpc
+
+ -- Charlie Smotherman <cjsmo@cableone.net>  Thu, 12 Aug 2010 09:59:36 -0500
+
+ampache (3.5.4-5) unstable; urgency=medium
+
+  * Setting urgency to medium as this fixes an RC bug.
+  * debian/rules
+    - After discussing with upstream it was decided to remove 
+      xspf_jukebox.fla and xspf_jukebox.swf. Added -X option to dh_install to
+      remove xspf_jukebox.fla and xspf_jukebox.swf. Closes: #591202
+  * debian/README.Debian
+    - Added a note regarding the current state of the xspf_jukebox 
+      flash player.
+  * Added updated ja.po, thx Hideki Yamane Closes: #591074
+  * debian/control
+    - Bumped Standards Version to 3.9.1, no changes needed.
+
+ -- Charlie Smotherman <cjsmo@cableone.net>  Sun, 01 Aug 2010 23:11:36 -0500
+
+ampache (3.5.4-4) unstable; urgency=low
+
+  * Updated README.Debian to account for changes in mysql and phpmyadmin.
+    Closes: #589078
+  * Force removal of /etc/cron.daily/ampache on remove and purge.
+    Closes: #586647
+  * Added new ru.po. Thx Yuri Kozlov Closes: #585694
+  * Corrected formatting of previous log entry.
+  * Bumped Standards Version to 3.9.0 no changes needed.
+
+ -- Charlie Smotherman <cjsmo@cableone.net>  Thu, 15 Jul 2010 06:42:51 -0500
+
+ampache (3.5.4-3) unstable; urgency=low
+
+  * Added new sv.po. Thx Martin Bagge. Closes: #582701
+  * Added new es.po. Thx Francisco Javier Cuadrado. Closes: #581870
+  * Added new fr.po. Thx Filippo Rusconi.  Closes: #581654
+  * Added new de.po. Thx Helge Kreutzmann. Closes: #580737
+  * Added new pt.po. Thx Américo Monteiro. Closes: #580440
+  * Removed superfluous spaces in ampache.templates.  Closes: #580738
+  * Added ampache.cron.daily this will run add and clean on all available
+    catalogs once a day (usually early mourning).
+  * debian/postinst made use of variable for /usr/sbin/lighty-enable-mod to
+    satisfy lintian.
+  * debian/postinst added remove statement to remove lighty_ampache.conf if
+    apache2 is installed and vic versa.
+  * debian/postrm made use of variable for /usr/sbin/lighty-disable-mod to
+    satisfy lintian.
+  * debian/postrm added rm statement to remove ampache.cron.daily on purge.
+  * Removed find rule from debian/rules, lintian was complaining of
+    unrepresentable changes to the source.
+  * debian/links added symlink creation for ampache.cron.daily to /etc/ampache.
+
+ -- Charlie Smotherman <cjsmo@cableone.net>  Sun, 06 June 2010 22:22:31 -0500
+
+ampache (3.5.4-2) unstable; urgency=low
+
+   * Added support for lighttpd servers.  What this means is that the default
+   behavior is for apache2 to be installed on new installs.  However if
+   lighttpd is installed and configured correctly the maintainer scripts 
+   should pickup on this and install ampache into the proper locations, 
+   create the need sym links, and enable the needed lighttpd modules.
+   Closes: #549009
+   * Made package depend on nusoap. Closes: #579829
+   * debian/control:
+     - Recommends, package should recommend the mysql-server meta-package so 
+     the default mysql-server is installed.  This will eleminate the need for 
+     additional uploads to increase mysql-server version number.
+     - added additional depends for lighttpd support.
+     - moved apache2 | lighttpd to the Recommends field.
+     - added dependency on libnusoap-php
+   * debian/ampache.postrm: 
+     - added purge statement to webserver restart so webserver reloads on 
+     remove and purge.
+     - added conditional removal statements to ampache.postrm so all user
+     modified config files are removed on purge.
+     - added lighttpd support
+   * debian/ampache.postinst:
+     - correted incorrect ampache.conf symlink creation. (LP: #533989)
+     - added lighttpd support
+   * debian/ampache.preinst:
+     - added ampache.preinst to correct sym link naming mismatch on upgrades.
+     (LP: #558697)
+     - added ampache.cfg.php backup to ampache.preinst, this way we make a 
+     backup copy of ampache.cfg.php before upgrade begins. 
+   * debian/postinst:
+     - removed ampache.cfg.php backup and migration, this was only need until 
+     Ubuntu Hardy reached EOL.
+     - added lighttpd support.
+   * debian/ampache.templates:
+     - added webserver types question for lighttpd support.
+     - combined webserver configuration and webserver restart into one
+     question (webserver_restart).
+     - reworded webserver_restart to be more generic in scope.
+   * debian/ampache.config:
+     - remove webserver-configure bits, this question is no longer needed.
+   * debian/amp-lighty.conf:
+     - added to create the lighttpd alias.
+   * debian/ampache.install:
+     - added amp-lighty.conf to be installed into /etc/ampache.
+   * debian/conf:
+     - added the directory debian/conf and moved debian/ampache.conf and 
+     debian/lighttpd_ampache.conf into it.
+   * debian/README.Debian:
+     - updated outdated links.  Made document 80 characters wide.
+   * debian/rules:
+     - added -Xnusoap to remove upstream copy of nusoap.
+   * debian/links:
+     - added nusoap sym links.
+        
+ -- Charlie Smotherman <cjsmo@cableone.net>  Sat, 01 May 2010 14:12:45 -0500
+
+ampache (3.5.4-1) unstable; urgency=low
+
+  * New upstream release, summary of changes:
+    - Added default RPC ACLs for new installations 
+    - Fix catalog size math for catalogs up to 4TB (Thx Joost.t.Hart@planet.nl)
+    - Fix httpq not correctly skipping to new song 
+    - Fix refreshing of localplay playlist when an item is skipped to
+    - Fix missing Content-Disposition filename= on non-transcoded songs
+    - Fix refreshing of localplay playlist when an item is removed
+    - Correct issue with some mp3s bitrates not being detected, which
+      in turn breaks length calculations
+    - Removed unused/dead files
+    - Correct issue with single song downloads
+  * Updated Standards Version to 3.8.4. No changes needed.
+
+ -- Charlie Smotherman <cjsmo@cableone.net>  Wed, 03 Feb 2010 16:32:41 -0600
+
+ampache (3.5.3-1) unstable; urgency=high
+
+  *  New upstream release, summary of changes:
+      - Added local authtype which uses PHP's PAM module
+      - Correct potential security issues due to misuse of REQUEST for write
+	  operations rather then POST. Thx Raphael Geissert geissert@debian.org.
+  *  Added php5-auth-pam to debian/control Depends section.
+  *  Setting urgency to high as this fixes potential security issues.
+
+ -- Charlie Smotherman <cjsmo@cableone.net>  Sun, 20 Dec 2009 11:31:45 -0500
+
+ampache (3.5.2-1) unstable; urgency=low
+
+   * New upstream maintenance release:
+      - Fix typo that caused song count to not be set on tag xml response.
+      - Fix tag methods so that alpha_match and exact_match works.
+      - Fix limit and offset not working on search_songs API method.
+      - Fix import m3u on catalog build so it does something.
+      - Fix inconsistent view during catalog operations.
+      - Sort malformed files into "Unknown (Broken)" rather then leaving them
+        in "Unknown (Orphaned)".
+      - Fix API democratic voting methods (Thx kindachris).
+      - Add server version information to API ping command.
+      - Fix Localplay API methods (Thx thomasa).
+      - Improve bin/catalog_update.inc to allow only verify, clean or add
+        (Thx ascheel).
+      - Fix issue with batch download and UNC paths (Thx greengeek).
+      - Added config option to turn caching on/off, Default is off.
+      - Fix issue where file tag pattern was ignored if files have no tag
+        structure.
+      - Add TDRC to list of parsed id3v2 tags.
+      - Fix issue where rating could get cached and not update the display
+        correctly until a page reload.
+      - Fix User Stats having a formating issue and not listing the active
+        playlist correctly.
+      - Fix incorrect default ogg transcode target format in the default
+        config file.
+      - Fix issue where the user preferences were not respected by the
+        streaming code due to caching.
+      - Fix issue where prevent multiple logins would prevent all logins.
+   * Increased debhelper to >=7.0.50, for the use of dh overrides in 
+      debian/rules.
+   * Increased Standards Version to 3.8.3.  No changes needed.
+   * Added Spanish debconf template translation es.po.  Thx Fran 
+      Closes: #552701.
+   * Added Japanese debconf template translation ja.po.  Thx Hideki 
+      Closes: #554089.
+   * Added php5-cli to debian/control Depends field.  Closes: #553313.
+   * Removed the find rule for messages.po as it has been corrected upstream.
+ 
+ -- Charlie Smotherman <cjsmo@cableone.net>  Thu, 19 Nov 2009 16:23:35 -0500
+
+ampache (3.5.1-1) unstable; urgency=high
+
+   * Setting urgency to  high as this fixes a RC bug.
+   * New upstream release.  Summary of new features:  (LP: #377016)
+     - Make the PHP error a little clearer for windows users by indicating
+       that their version of PHP is < 5.3 (required for windows)
+     - Fix random methods not working for Localplay
+     - Fix extra space on prefixed albums (Thx ibizaman)
+     - Add missing operator on tag and rating searches so they will
+       work with other methods (Thx kiehnet@netscape.net)
+     - Fix get_art_url() so it returns something... 
+     - Fix problem with creating new playlists where it doesn't work
+       but appending to an existing did. 
+     - Fixed issue with url_to_song, also cleaned up the code a bit
+     - Fixed issue with Random All Catalogs
+     - Fixed issues with API and Tag methods not working as advertised
+     - Fix endless loop in getid3() with malformed genre tags in mp3s
+     - Fixed show test page always returning false on web path
+     - Update Man page to adhear to newer Debian rules
+     - Fixed issue with Videos being incorrectly registered with stats
+       and now playing as songs. 
+     - Fixed missing > in HTML for song row
+   * Bumped Standards-Version to 3.8.2, no changes needed.
+   * Bumped debhelper to dh 7.
+     - increased debian/compat to 7.
+	 - debian/rules removed dh_clean -k in favor of dh_prep
+   * Lintian complains of FreeMonoMedium.ttf being an embeded fonts package.
+     FreeMonoMedium.ttf is actually part of the ttf-freefont package.
+     - added ttf-freefont to the Depends section of debian/control.
+     - added -XFreeMono-Medium to dh_install in debian/rules.
+     - added FreeMono.ttf symbolic link to debian/links.
+   * Lintian complains of the wrong file permissions for 
+     -  /locale/base/gather-messages.sh, added -Xgather-messages.sh to 
+	   debian/rules, gather-messages.sh is not used by ampache proper and 
+	   can be safely removed.  It is only utilized by developers who are 
+	   creating or editing the translation files.
+	 -  /locale/pl_PL/LC_MESSAGES/messages.po added find and chmod rule 
+	   to debian/rules.
+	 -  /locale/pl_PL/LC_MESSAGES/messages.mo added find and chmod rule 
+	   to debian/rules.
+	 -  /docs/CHANGELOG added find and chmod rule to debian/rules.
+   * Lintian complains of wrong-name-for-upstream-changelog
+	 -  install upstream CHANGELOG to /usr/share/ampache/www/docs
+	 -  added find and gzip -9 rule to debian/rules
+	 -  added symlink creation to debian/links to link
+	   /usr/share/ampache/www/docs/CHANGELOG.gz to 
+	   /usr/share/doc/ampache/changelog.gz  
+   * Lacy Marrow has responded and has stated that he is dropping the GPL-3 
+     licensing of his work and is now releasing version 5.9.5 of the 
+     XSPF JukeBox under the same BSD license that the original version of XSPF 
+     Music Player was released under (XSPF JukeBox is based on XSPF Music 
+     Player).  So now XSPF Music Player and XSPF JukeBox are now released under
+     the same BSD type license.  This closes RC Bug #526719.  Closes: #526719
+         - Updated debian/copyright to refect this.
+    * Added dh_installman to debian/rules so the manpage now installs correctly.
+         - Added debian/ampache.manpages.
+    * debian/ampache.config downgraded db_input to medium
+    * debian/copyright removed (C) in favor of the word copyright.
+    * addded copyright header info to debian/po/nl.po and debian/po/sv.po.
+ 
+ -- Charlie Smotherman <cjsmo@cableone.net>  Tue, 07 Jul 2009 07:23:35 -0500
+
+ampache (3.5+svn2078-1) unstable; urgency=low
+
+   [Not Released]
+   * New upstream release.  Summary of new features
+     - Video Streaming Support
+     - Access Control List Wizard / Simplification
+     - IPv6 Support on all Access Lists and IP related operations
+     - Corrected Multi-Byte Character Support
+     - Up to date Translations in 14 different languages
+     - Optional Lyrics Support
+     - Basic Tag Support (allowing multiple genres per song)
+     - Countless Optomizations / Caching to speed up the interface
+     - Vastly Improved API with simplified configuration and setup
+     - Standardized UI should give users a more consistent experience
+     - Enable Last.FM plug-in by default
+     - Ability to Run Add/Verify catalog operations starting at a specific
+       Sub Directory rather then indexing the whole catalog.
+   * Added ${misc:Depends} to debian/control Depends section to fix lintian
+     error.
+   * Demoted mysql-server-5.0 to the Suggests field of debian/control, so
+     mysql-server-5.0 is not installed by default.  Closes: #526475
+   * Updated standards version to 3.8.1.
+   * Fixed charset of XML documents returned (Thx blueorder).  (LP: #360411)
+   * Added /modules/flash/xspf_jukebox.fla as this is the source code for the
+     XSPF JukeBox media player.  This fixes the most serious part of, and is a
+     partial fix for RC bug #526719.
+   * Added XSPF JukeBox copyright information into debian/copyright.  This is a 
+     partial fix for #526719.
+   * Added copyright header information to po/nl.po and po/sv.po
+   * Changed debian/copyright to the debian proposed machine readeable
+     format.
+   * Added /doc/man/man1/ampache.1 to debian/ampache.install.
+   * Added Vcs-Svn and Vcs-Browser section to debian/control.
+
+ -- Charlie Smotherman <cjsmo@cableone.net>  Wed, 06 May 2009 00:21:35 -0500
+
+ampache (3.4.4-1) unstable; urgency=low
+
+    * New upstream release.
+    * Fixed debian/ampache.config so debconf now asks questions correctly.
+    * Reworked debian/ampache.postinst server restart to be server reload. 
+      Added additional check for ampache.cfg.php, then backup ampache.cfg.php
+      prior to running migrate_config.inc.  Used full pathname in 
+      migrate_config.inc.
+    * Added Suggest section to debian/control.  Demoted php5-gd and phpmyadmin
+      to the Suggest section in an attempt to keep extra fonts packages and 
+      X11 packages from being pulled in on a server setup.
+    * Added Japanese translation.  
+    * Changed debian/copyright to the machine readable debian proposed format.
+      Updated debian/copyright with Japanese translation copyright info. 
+    * Added debian/watch.
+    * Changed maintainer email address in debian/control and debian/changelog.
+
+ -- Charlie Smotherman <cjsmo@ubuntu.com>  Sat, 17 Jan 2009 18:23:43 -0500
+
+ampache (3.4.3-1) unstable; urgency=low
+
+    * New upstream maintenance release, please see src/docs/CHANGELOG for
+      complete details.
+    * Updated package to depend on libphp-snoopy.
+    * Added dh_install -XSnoopy.class.php to debian/rules.
+    * Added debian/dirs.
+    * Added snoopy symlink to debian/links.
+    * Added prototype symlink to debian/links.
+    * Updated debian/ampache.postrm to remove prototype/snoopy symlinks on
+      purge.
+    * Updated debian/rules by removing -Xgather-messages.sh option from 
+      dh_install.  Upstream decided to remove 
+      src/locale/base/gather-messages.sh from the .org.tar.gz.
+      Closes: #496369
+        
+ -- Charlie Smotherman <cjsmo@cableone.net>  Fri, 03 Oct 2008 05:48:35 -0500
+
+ampache (3.4.2-1) unstable; urgency=low
+
+    * Updated ampache.conf, postinst, postrm, to fix a debconf problem.
+    * Updated debian/rules by adding -Xgather-messages.sh option to dh_install.
+      Closes:  #496369
+    * Updated debian/rules by adding -Xprototype.js option to dh_install.
+      This was added to correct a lintian error.
+    * Updated debian/control so ampache now depends on libjs-prototype.
+    * Updated debian/links to create symlink to libjs-prototype.
+    * Updated Standards Version to 3.8.0.
+    * Added debian/watch.
+    * Updated debian/copyright with /src/locale/ja_JP copyright info.
+        
+ -- Charlie Smotherman <cjsmo@cableone.net>  Thu, 29 Aug 2008 12:05:34 -0500
+
+ampache (3.4.1-1) unstable; urgency=low
+
+    * Included numerous upstream fixes, please see /src/docs/CHANGELOG
+      dated 05.31.2008 for more details.
+    * Removed /src/debian/preinst, was not needed.
+    * Removed Vcs entry in /src/debian/control, was not needed.
+    * Added updated sv.po translation.  Thanks Martin Bagge.  Closes: #483432
+    * Updated /src/debian/copyright with sv.po and nl.po copyright info.
+    * Updated /src/debian/copyright with /src/locale/ca_CA copyright info.
+    * Removed /src/locale/is_IS copyright info from /src/debian/copyright, 
+      /src/locale/is_IS removed by upstream.
+    
+ -- Charlie Smotherman <cjsmo@cableone.net>  Sat, 31 May 2008 09:32:43 -0500
+
+ampache (3.4-2) unstable; urgency=high
+
+    * Included some upstream gather album art fixes.
+    
+ -- Charlie Smotherman <cjsmo@cableone.net>  Thu, 15 May 2008 18:44:23 -0500
+
+ampache (3.4-1) unstable; urgency=high
+
+    * New Upstream version release.
+    * Added updated nl.po translation.  Thanks Bart Cornelis. Closes: #463441
+    
+ -- Charlie Smotherman <cjsmo@cableone.net>  Sat, 10 May 2008 07:53:23 -0500
+
+ampache (3.3.3.5-dfsg1-1) unstable; urgency=high
+
+    * Removed COLLEGE.ttf from the org.tar.gz. Closes: #455698
+    * Removed the -XCOLLEGE.ttf and -Xhelperapps options from dh_install in
+      debian rules. 
+    * Removed empty helperapps folder in src/modules/id3 to correct lintian
+      error.
+    * Updated Standards Version to 3.7.3.
+
+ -- Charlie Smotherman <cjsmo@cableone.net>  Thu, 28 Dec 2007 10:20:44 -0500
+
+ampache (3.3.3.5-dfsg-3) unstable; urgency=high
+
+    * Added -XCOLLEGE.ttf option to dh_install in debian rules.  Added
+      ttf-freefont to the depends section of debian control. Added link to
+      freefont in debian links. Closes: #455698
+    * Removed php5-cli from depends section of debian control.
+    * Moved php5-gd from the depends field to the recommends field.
+      Closes: #452638 
+    * Added Dutch po file, thanks Bart Cornelis. Closes: #449405
+    * Fixed a potential display problem.
+    * Updated debian copyright with Dutch translation copyright information.
+    * Added -Xhelperapps option to dh_install in debian rules to correct a 
+      lintian error.
+
+ -- Charlie Smotherman <cjsmo@cableone.net>  Thu, 20 Dec 2007 01:17:24 -0500
+    
+ampache (3.3.3.5-dfsg-2) unstable; urgency=low
+
+    * Added dpatch system.
+    * Fixed getid3.lib.php.
+    * Updated debian/copyright to include translator copyright information.
+    * Upstream will not be including libphp-snoopy into version 3.3.3.5.
+      However he is considering it's usage in version 3.4 which is in
+      development. Closes: #443947
+    * Debconf templates and debian/control reviewed by the debian-l10n-
+      english team as part of the Smith review project.  Thanks Christian
+      Perrier <bubulle@debian.org>.  Closes: #445084, #446006
+    * [Debconf translation updates]
+    * Tamil. Closes: #445597
+    * Portuguese. Closes: #445606, #442391
+    * Czech. Closes: #445654
+    * Basque. Closes: #445949
+    * German. Closes: #446004
+    * Russian. Closes: #446142
+    * Finnish. Closes: #446407
+    * French. Closes: #446553
+    * Italian. Closes: #446591
+    * Galician. Closes: #446605
+    * Vietnamese. Closes: #446987
+    * Brazilian Portuguese. Closes: #447758
+
+ -- Charlie Smotherman <cjsmo@cableone.net>  Tue, 23 Oct 2007 20:28:39 +0200
+
+ampache (3.3.3.5-dfsg-1) unstable; urgency=low
+
+    * Initial release (Closes: #407337)  
+
+ -- Charlie Smotherman <cjsmo@cableone.net>  Wed,  1 Aug 2007 11:52:03 -0500

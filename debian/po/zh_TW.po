@@ -1,0 +1,63 @@
+# zh_TW po-debconf translation for ampache
+# Copyright (C) 2010 Charlie Smotherman <cjsmo@cableone.net>
+# This file is distributed under the same license as the ampache package.
+# Kan-Ru Chen <koster@debian.org>, 2010
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ampache 3.5.4-7\n"
+"Report-Msgid-Bugs-To: ampache@packages.debian.org\n"
+"POT-Creation-Date: 2012-05-24 09:56-0500\n"
+"PO-Revision-Date: 2010-08-29 11:40+0800\n"
+"Last-Translator: Kan-Ru Chen <koster@debian.org>\n"
+"Language-Team: Debian Chinese Traditional <debian-chinese-big5@lists.debian."
+"org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: boolean
+#. Description
+#: ../ampache.templates:2001
+msgid "Configure and restart the web server?"
+msgstr "設定並重新啟動網頁伺服器？"
+
+#. Type: boolean
+#. Description
+#: ../ampache.templates:2001
+msgid ""
+"The web server needs to be reconfigured and restarted to enable Ampache. "
+"Please choose whether you want to restart it automatically now or do it "
+"yourself later."
+msgstr ""
+"網頁伺服器設定後必須重新啟動以啟用 Ampache。請選擇您使否想要現在自動重新啟"
+"動，或稍候手動執行。"
+
+#. Type: boolean
+#. Description
+#: ../ampache.templates:2001
+msgid ""
+"To manually restart the web server, use one of the following commands: \"/"
+"etc/init.d/apache2 restart\" or \"/etc/init.d/lighttpd restart\""
+msgstr ""
+"要手動重啟網頁伺服器，可以使用以下命令：\"/etc/init.d/apache2 restart\" 或 "
+"\"/etc/init.d/lighttpd restart\""
+
+#~ msgid "apache2"
+#~ msgstr "apache2"
+
+#~ msgid "lighttpd"
+#~ msgstr "lighttpd"
+
+#~ msgid "Web server to configure automatically:"
+#~ msgstr "選擇要設定的伺服器"
+
+#~ msgid ""
+#~ "Please select the web server to be configured automatically for Ampache."
+#~ msgstr "請選擇要自動為 Ampache 設定的網頁伺服器。"
+
+#~ msgid ""
+#~ "Apache2 and Lighttpd are the only supported web servers for automatic "
+#~ "configuration."
+#~ msgstr "Apache2 和 Lighttpd 是目前支援自動設定的網頁伺服器。"
