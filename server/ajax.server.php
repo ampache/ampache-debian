@@ -3,7 +3,7 @@
 /**
  *
  * LICENSE: GNU General Public License, version 2 (GPLv2)
- * Copyright 2001 - 2014 Ampache.org
+ * Copyright 2001 - 2015 Ampache.org
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License v2
@@ -153,23 +153,31 @@ switch ($_REQUEST['action']) {
     break;
     /* Setting ratings */
     case 'set_rating':
-        ob_start();
-        $rating = new Rating($_GET['object_id'], $_GET['rating_type']);
-        $rating->set_rating($_GET['rating']);
-        Rating::show($_GET['object_id'], $_GET['rating_type']);
-        $key = "rating_" . $_GET['object_id'] . "_" . $_GET['rating_type'];
-        $results[$key] = ob_get_contents();
-        ob_end_clean();
+        if (User::is_registered()) {
+            ob_start();
+            $rating = new Rating($_GET['object_id'], $_GET['rating_type']);
+            $rating->set_rating($_GET['rating']);
+            Rating::show($_GET['object_id'], $_GET['rating_type']);
+            $key = "rating_" . $_GET['object_id'] . "_" . $_GET['rating_type'];
+            $results[$key] = ob_get_contents();
+            ob_end_clean();
+        } else {
+            $results['rfc3514'] = '0x1';
+        }
     break;
     /* Setting userflags */
     case 'set_userflag':
-        ob_start();
-        $userflag = new Userflag($_GET['object_id'], $_GET['userflag_type']);
-        $userflag->set_flag($_GET['userflag']);
-        Userflag::show($_GET['object_id'], $_GET['userflag_type']);
-        $key = "userflag_" . $_GET['object_id'] . "_" . $_GET['userflag_type'];
-        $results[$key] = ob_get_contents();
-        ob_end_clean();
+        if (User::is_registered()) {
+            ob_start();
+            $userflag = new Userflag($_GET['object_id'], $_GET['userflag_type']);
+            $userflag->set_flag($_GET['userflag']);
+            Userflag::show($_GET['object_id'], $_GET['userflag_type']);
+            $key = "userflag_" . $_GET['object_id'] . "_" . $_GET['userflag_type'];
+            $results[$key] = ob_get_contents();
+            ob_end_clean();
+        } else {
+            $results['rfc3514'] = '0x1';
+        }
     break;
     case 'action_buttons':
         ob_start();

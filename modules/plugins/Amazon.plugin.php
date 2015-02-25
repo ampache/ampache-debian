@@ -3,7 +3,7 @@
 /**
  *
  * LICENSE: GNU General Public License, version 2 (GPLv2)
- * Copyright 2001 - 2014 Ampache.org
+ * Copyright 2001 - 2015 Ampache.org
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License v2
@@ -23,7 +23,9 @@
 class AmpacheAmazon {
 
     public $name           = 'Amazon';
+    public $categories     = 'metadata';
     public $description    = 'Amazon arts';
+    public $url            = 'http://www.amazon.com';
     public $version        = '000001';
     public $min_ampache    = '370009';
     public $max_ampache    = '999999';
@@ -124,10 +126,10 @@ class AmpacheAmazon {
     } // load
 
     /**
-     * get_arts
+     * gather_arts
      * Returns arts for what we're passed in.
      */
-    public static function gather_arts($type, $options = array(), $limit = 5) {
+    public function gather_arts($type, $options = array(), $limit = 5) {
         
         $images     = array();
         $final_results  = array();
@@ -144,7 +146,7 @@ class AmpacheAmazon {
 
         // Create the Search Object
         $amazon = new AmazonSearch($this->amazon_developer_public_key, $this->amazon_developer_private_api_key, $this->amazon_developer_associate_tag, $this->amazon_base_url);
-            if (AmpConfig::get('proxy_host') AND AmpConfig::get('proxy_port')) {
+            if (AmpConfig::get('proxy_host') && AmpConfig::get('proxy_port')) {
                 $proxyhost = AmpConfig::get('proxy_host');
                 $proxyport = AmpConfig::get('proxy_port');
                 $proxyuser = AmpConfig::get('proxy_user');
@@ -188,14 +190,8 @@ class AmpacheAmazon {
         /* Log this if we're doin debug */
         debug_event('amazon-xml',"Searched using " . $options['keyword'] . ", results: " . count($final_results), 5);
 
-        // If we've hit our limit
-        if (!empty($limit) && count($final_results) >= $limit) {
-            break;
-        }
-
         /* Foreach through what we've found */
         foreach ($final_results as $result) {
-
             $key = '';
             /* Recurse through the images found */
             foreach ($possible_keys as $k) {
@@ -204,28 +200,31 @@ class AmpacheAmazon {
                     break;
                 }
             } // foreach
+            
+            if (!empty($key)) {
+                // Rudimentary image type detection, only JPG and GIF allowed.
+                if (substr($result[$key], -4) == '.jpg') {
+                    $mime = "image/jpeg";
+                } elseif (substr($result[$key], -4) == '.gif') {
+                    $mime = "image/gif";
+                } elseif (substr($result[$key], -4) == '.png') {
+                    $mime = "image/png";
+                } else {
+                    /* Just go to the next result */
+                    continue;
+                }
 
-            // Rudimentary image type detection, only JPG and GIF allowed.
-            if (substr($result[$key], -4) == '.jpg') {
-                $mime = "image/jpeg";
-            } elseif (substr($result[$key], -4) == '.gif') {
-                $mime = "image/gif";
-            } elseif (substr($result[$key], -4) == '.png') {
-                $mime = "image/png";
-            } else {
-                /* Just go to the next result */
-                continue;
-            }
+                $data = array();
+                $data['url']    = $result[$key];
+                $data['mime']   = $mime;
+                $data['title']  = $this->name;
 
-            $data = array();
-            $data['url']    = $result[$key];
-            $data['mime']   = $mime;
+                $images[] = $data;
 
-            $images[] = $data;
-
-            if (!empty($limit)) {
-                if (count($images) >= $limit) {
-                    return $images;
+                if (!empty($limit)) {
+                    if (count($images) >= $limit) {
+                        return $images;
+                    }
                 }
             }
 
@@ -233,7 +232,7 @@ class AmpacheAmazon {
 
         return $images;
         
-    } // get_metadata
+    } // gather_arts
 
 } // end AmpacheAmazon
 ?>

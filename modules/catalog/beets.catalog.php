@@ -4,7 +4,7 @@
 /**
  *
  * LICENSE: GNU General Public License, version 2 (GPLv2)
- * Copyright 2001 - 2014 Ampache.org
+ * Copyright 2001 - 2015 Ampache.org
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License v2
@@ -141,6 +141,13 @@ class Catalog_beets extends Beets\Catalog
     public function getBeetsDb()
     {
         return $this->beetsdb;
+    }
+
+    public function format()
+    {
+        parent::format();
+        $this->f_info = $this->beetsdb;
+        $this->f_full_info = $this->f_info;
     }
 
 }

@@ -3,7 +3,7 @@
 /**
  *
  * LICENSE: GNU General Public License, version 2 (GPLv2)
- * Copyright 2001 - 2014 Ampache.org
+ * Copyright 2001 - 2015 Ampache.org
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -74,8 +74,7 @@ class Ampache_RSS
     {
         $titles = array('now_playing' => T_('Now Playing'),
                 'recently_played' => T_('Recently Played'),
-                'latest_album' => T_('Newest Albums'),
-                'latest_artist' => T_('Newest Artists'));
+                'latest_album' => T_('Newest Albums'));
 
         return scrub_out(AmpConfig::get('site_title')) . ' - ' . $titles[$this->type];
 
@@ -101,8 +100,7 @@ class Ampache_RSS
      */
     public static function validate_type($type)
     {
-        $valid_types = array('now_playing','recently_played','latest_album','latest_artist','latest_song',
-                'popular_song','popular_album','popular_artist');
+        $valid_types = array('now_playing','recently_played','latest_album');
 
         if (!in_array($type,$valid_types)) {
             return 'now_playing';
@@ -242,6 +240,36 @@ class Ampache_RSS
                         'description'=>$song->title . ' - ' . $song->f_artist_full . ' - ' . $song->f_album_full . ' - ' . $time_string,
                         'comments'=>$client->username,
                         'pubDate'=>date("r",$item['date']));
+            $results[] = $xml_array;
+
+        } // end foreach
+
+        return $results;
+
+    } // load_recently_played
+
+    /**
+     * load_latest_album
+     * This loads in the latest added albums
+     * @return array
+     */
+    public static function load_latest_album()
+    {
+        $ids = Stats::get_newest('album', 10);
+
+        $results = array();
+
+        foreach ($ids as $id) {
+            $album = new Album($id);
+            $album->format();
+
+            $xml_array = array('title' => $album->f_name,
+                    'link' => $album->f_link_src,
+                    'description' => $album->f_artist_name . ' - ' . $album->f_name,
+                    'image' => Art::url($album->id, 'album'),
+                    'comments' => '',
+                    'pubDate' => date("c", $album->get_addtime_first_song())
+            );
             $results[] = $xml_array;
 
         } // end foreach

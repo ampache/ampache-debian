@@ -3,7 +3,7 @@
 /**
  *
  * LICENSE: GNU General Public License, version 2 (GPLv2)
- * Copyright 2001 - 2014 Ampache.org
+ * Copyright 2001 - 2015 Ampache.org
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License v2
@@ -23,8 +23,9 @@
 class Ampachegrowl {
 
     public $name           = 'Growl';
+    public $categories     = 'scrobbling';
     public $description    = 'Send your played songs notification to Growl';
-    public $url            = '';
+    public $url            = 'http://growl.info';
     public $version        ='000001';
     public $min_ampache    ='360003';
     public $max_ampache    ='999999';

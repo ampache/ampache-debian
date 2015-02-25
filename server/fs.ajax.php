@@ -3,7 +3,7 @@
 /**
  *
  * LICENSE: GNU General Public License, version 2 (GPLv2)
- * Copyright 2001 - 2014 Ampache.org
+ * Copyright 2001 - 2015 Ampache.org
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License v2
@@ -66,6 +66,7 @@ class fs
         $this->base = $this->real($base);
         if (!$this->base) { throw new Exception('Base directory does not exist'); }
     }
+
     public function lst($id, $with_root = false)
     {
         $dir = $this->path($id);
@@ -87,6 +88,7 @@ class fs
         }
         return $res;
     }
+
     public function data($id)
     {
         if (strpos($id, ":")) {

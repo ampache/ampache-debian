@@ -3,7 +3,7 @@
 /**
  *
  * LICENSE: GNU General Public License, version 2 (GPLv2)
- * Copyright 2001 - 2014 Ampache.org
+ * Copyright 2001 - 2015 Ampache.org
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License v2
@@ -33,17 +33,19 @@ UI::show_box_top($season->f_name . ' - ' . $season->f_tvshow_link, 'info-box');
     Art::display('tvshow_season', $season->id, $season->f_name, 6);
     ?>
 </div>
-<?php
-if (AmpConfig::get('ratings')) {
-?>
-<div id="rating_<?php echo intval($season->id); ?>_tvshow_season" style="display:inline;">
-    <?php show_rating($season->id, 'tvshow_season'); ?>
-</div>
-<?php } ?>
-<?php if (AmpConfig::get('userflags')) { ?>
-<div style="display:table-cell;" id="userflag_<?php echo $season->id; ?>_tvshow_season">
-        <?php Userflag::show($season->id,'tvshow_season'); ?>
-</div>
+<?php if (User::is_registered()) { ?>
+    <?php
+    if (AmpConfig::get('ratings')) {
+    ?>
+    <div id="rating_<?php echo intval($season->id); ?>_tvshow_season" style="display:inline;">
+        <?php show_rating($season->id, 'tvshow_season'); ?>
+    </div>
+    <?php } ?>
+    <?php if (AmpConfig::get('userflags')) { ?>
+    <div style="display:table-cell;" id="userflag_<?php echo $season->id; ?>_tvshow_season">
+            <?php Userflag::show($season->id,'tvshow_season'); ?>
+    </div>
+    <?php } ?>
 <?php } ?>
 <div id="information_actions">
     <h3><?php echo T_('Actions'); ?>:</h3>

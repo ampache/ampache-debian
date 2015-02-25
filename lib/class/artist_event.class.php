@@ -3,7 +3,7 @@
 /**
  *
  * LICENSE: GNU General Public License, version 2 (GPLv2)
- * Copyright 2001 - 2014 Ampache.org
+ * Copyright 2001 - 2015 Ampache.org
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License v2
@@ -34,7 +34,7 @@ class Artist_Event
      * get_upcoming_events
      * Returns a list of upcoming events
      * @param Artist $artist
-     * @return array|boolean
+     * @return SimpleXMLElement|boolean
      */
     public static function get_upcoming_events(Artist $artist)
     {
@@ -62,7 +62,7 @@ class Artist_Event
      * get_past_events
      * Returns a list of past events
      * @param Artist $artist
-     * @return array|boolean
+     * @return SimpleXMLElement|boolean
      */
     public static function get_past_events(Artist $artist)
     {

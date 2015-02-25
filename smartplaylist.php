@@ -3,7 +3,7 @@
 /**
  *
  * LICENSE: GNU General Public License, version 2 (GPLv2)
- * Copyright 2010 - 2013 Ampache.org
+ * Copyright 2010 - 2015 Ampache.org
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License v2
@@ -63,7 +63,7 @@ switch ($_REQUEST['action']) {
             break;
         } // end switch on operator
 
-        $playlist_name    = scrub_in($_REQUEST['playlist_name']);
+        $playlist_name    = (string) scrub_in($_REQUEST['playlist_name']);
 
         $playlist = new Search(null, 'song');
         $playlist->parse_rules($data);

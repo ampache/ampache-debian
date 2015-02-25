@@ -3,7 +3,7 @@
 /**
  *
  * LICENSE: GNU General Public License, version 2 (GPLv2)
- * Copyright 2001 - 2014 Ampache.org
+ * Copyright 2001 - 2015 Ampache.org
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -427,7 +427,7 @@ class Plex_Api
         return $headers;
     }
 
-    static $request_headers = array();
+    public static $request_headers = array();
     public static function request_output_header($ch, $header)
     {
         self::$request_headers[] = $header;
@@ -570,12 +570,14 @@ class Plex_Api
                 // May be ok on Apple & UPnP world but that's really ugly for a server...
                 // Yes, it's a little hack but it works.
                 $localrs = "http://127.0.0.1:32400/";
+                $options = Core::requests_options();
                 if (strpos($url, $localrs) !== false) {
+                    $options = array(); // In case proxy is set, no proxy for local addresses
                     $url = "http://127.0.0.1:" . Plex_XML_Data::getServerPort() . "/" . substr($url, strlen($localrs));
                 }
 
                 if ($width && $height && $url) {
-                    $request = Requests::get($url);
+                    $request = Requests::get($url, array(), $options);
                     if ($request->status_code == 200) {
                         ob_clean();
                         $mime = $request->headers['content-type'];
@@ -644,6 +646,7 @@ class Plex_Api
         if ($n == 2) {
             $transcode_to = $params[0];
             $action = $params[1];
+            $id = '';
 
             $path = $_GET['path'];
             $protocol = $_GET['protocol'];
@@ -715,14 +718,16 @@ class Plex_Api
                         }
                     }
 
-                    if (Plex_XML_Data::isSong($id)) {
-                        $url = Song::play_url(Plex_XML_Data::getAmpacheId($id), $additional_params);
-                    } elseif (Plex_XML_Data::isVideo($id)) {
-                        $url = Video::play_url(Plex_XML_Data::getAmpacheId($id), $additional_params);
-                    }
+                    if ($id) {
+                        if (Plex_XML_Data::isSong($id)) {
+                            $url = Song::play_url(Plex_XML_Data::getAmpacheId($id), $additional_params);
+                        } elseif (Plex_XML_Data::isVideo($id)) {
+                            $url = Video::play_url(Plex_XML_Data::getAmpacheId($id), $additional_params);
+                        }
 
-                    if ($url) {
-                        self::stream_url($url);
+                        if ($url) {
+                            self::stream_url($url);
+                        }
                     }
                 }
             } elseif ($action == "hls.m3u8") {
@@ -970,20 +975,22 @@ class Plex_Api
                     if ($createMode) {
                         // Upload art
                         $litem = Plex_XML_Data::createLibraryItem($key);
-                        $uri = Plex_XML_Data::getMetadataUri($key) . '/' . Plex_XML_Data::getPhotoPlexKind($kind) . '/' . $key;
-                        if (is_a($litem, 'video')) {
-                            $type = 'video';
-                        } else {
-                            $type = get_class($litem);
+                        if ($litem != null) {
+                            $uri = Plex_XML_Data::getMetadataUri($key) . '/' . Plex_XML_Data::getPhotoPlexKind($kind) . '/' . $key;
+                            if (is_a($litem, 'video')) {
+                                $type = 'video';
+                            } else {
+                                $type = get_class($litem);
+                            }
+
+                            $art = new Art($litem->id, $type, $kind);
+                            $raw = file_get_contents("php://input");
+                            $art->insert($raw);
+
+                            header('Content-Type: text/html');
+                            echo $uri;
+                            exit;
                         }
-
-                        $art = new Art($litem->id, $type, $kind);
-                        $raw = file_get_contents("php://input");
-                        $art->insert($raw);
-
-                        header('Content-Type: text/html');
-                        echo $uri;
-                        exit;
                     }
                     Plex_XML_Data::addPhotos($r, $key, $kind);
                 } elseif ($subact == "thumb" || $subact == "poster" || $subact == "art" || $subact == "background") {
@@ -1055,6 +1062,7 @@ class Plex_Api
         curl_setopt_array($ch, array(
             CURLOPT_HTTPHEADER => $reqheaders,
             CURLOPT_HEADER => false,
+            CURLOPT_CONNECTTIMEOUT => 2,
             CURLOPT_RETURNTRANSFER => false,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_WRITEFUNCTION => array('Plex_Api', 'replay_body'),
@@ -1063,7 +1071,9 @@ class Plex_Api
             CURLOPT_SSL_VERIFYHOST => false,
             CURLOPT_TIMEOUT => 0
         ));
-        curl_exec($ch);
+    if (curl_exec($ch) === false) {
+            debug_event('plex-api', 'Curl error: ' . curl_error($ch),1);
+    }
         curl_close($ch);
     }
 

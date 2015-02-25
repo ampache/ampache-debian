@@ -3,7 +3,7 @@
 /**
  *
  * LICENSE: GNU General Public License, version 2 (GPLv2)
- * Copyright 2001 - 2014 Ampache.org
+ * Copyright 2001 - 2015 Ampache.org
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License v2
@@ -51,7 +51,7 @@ if ($albums) {
         <?php echo Ajax::button('?action=basket&type=album&' . $album->get_http_album_query_ids('id'),'add', T_('Add to temporary playlist'),'play_full_' . $album->id); ?>
         </div>
         <?php
-        if (AmpConfig::get('ratings')) {
+        if (AmpConfig::get('ratings') && Access::check('interface', '25')) {
             echo "<div id=\"rating_" . $album->id . "_album\">";
             show_rating($album->id, 'album');
             echo "</div>";

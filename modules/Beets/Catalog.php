@@ -4,7 +4,7 @@
 /**
  *
  * LICENSE: GNU General Public License, version 2 (GPLv2)
- * Copyright 2001 - 2014 Ampache.org
+ * Copyright 2001 - 2015 Ampache.org
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License v2
@@ -104,22 +104,33 @@ abstract class Catalog extends \Catalog
     }
 
     /**
+     * Get the parser class like CliHandler or JsonHandler
+     */
+    abstract protected function getParser();
+
+    /**
      * Adds new songs to the catalog
      * @param array $options
      */
     public function add_to_catalog($options = null)
     {
-        require AmpConfig::get('prefix') . '/templates/show_adds_catalog.inc.php';
-        flush();
+        if (!defined('SSE_OUTPUT')) {
+            require AmpConfig::get('prefix') . '/templates/show_adds_catalog.inc.php';
+            flush();
+        }
         set_time_limit(0);
-
-        UI::show_box_top(T_('Running Beets Update') . '. . .');
+        if (!defined('SSE_OUTPUT')) {
+            UI::show_box_top(T_('Running Beets Update') . '. . .');
+        }
         $parser = $this->getParser();
         $parser->setHandler($this, 'addSong');
-        $parser->start($this->listCommand);
+        $parser->start($parser->getTimedCommand($this->listCommand, 'added', $this->last_add));
         $this->updateUi('add', $this->addedSongs, null, true);
+        $this->update_last_add();
 
-        UI::show_box_bottom();
+        if (!defined('SSE_OUTPUT')) {
+            UI::show_box_bottom();
+        }
     }
 
     /**
@@ -167,10 +178,12 @@ abstract class Catalog extends \Catalog
         debug_event('verify', 'Starting on ' . $this->name, 5);
         set_time_limit(0);
 
+        /* @var $parser Handler */
         $parser = $this->getParser();
         $parser->setHandler($this, 'verifySong');
-        $parser->start($this->listCommand);
+        $parser->start($parser->getTimedCommand($this->listCommand, 'mtime', $this->last_update));
         $this->updateUi('verify', $this->verifiedSongs, null, true);
+        $this->update_last_update();
         return array('updated' => $this->verifiedSongs, 'total' => $this->verifiedSongs);
     }
 

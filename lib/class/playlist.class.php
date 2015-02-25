@@ -3,7 +3,7 @@
 /**
  *
  * LICENSE: GNU General Public License, version 2 (GPLv2)
- * Copyright 2001 - 2014 Ampache.org
+ * Copyright 2001 - 2015 Ampache.org
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -118,9 +118,9 @@ class Playlist extends playlist_object
      * This takes the current playlist object and gussies it up a little
      * bit so it is presentable to the users
      */
-    public function format()
+    public function format($details = true)
     {
-        parent::format();
+        parent::format($details);
         $this->f_link = AmpConfig::get('web_path') . '/playlist.php?action=show_playlist&playlist_id=' . $this->id;
         $this->f_name_link = '<a href="' . $this->f_link . '">' . $this->f_name . '</a>';
 
@@ -353,7 +353,7 @@ class Playlist extends playlist_object
      * add_songs
      * This takes an array of song_ids and then adds it to the playlist
      */
-    public function add_songs($song_ids=array(),$ordered=false)
+    public function add_songs($song_ids=array(), $ordered=false)
     {
         $medias = array();
         foreach ($song_ids as $song_id) {
@@ -362,11 +362,11 @@ class Playlist extends playlist_object
                 'object_id' => $song_id,
             );
         }
-        $this->add_medias($medias);
+        $this->add_medias($medias, $ordered);
 
     } // add_songs
 
-    public function add_medias($medias)
+    public function add_medias($medias, $ordered=false)
     {
         /* We need to pull the current 'end' track and then use that to
          * append, rather then integrate take end track # and add it to

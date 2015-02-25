@@ -3,7 +3,7 @@
 /**
  *
  * LICENSE: GNU General Public License, version 2 (GPLv2)
- * Copyright 2001 - 2014 Ampache.org
+ * Copyright 2001 - 2015 Ampache.org
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License v2
@@ -67,6 +67,10 @@ class Broadcast extends database_object implements library_item
      *  @var string $f_tags
      */
     public $f_tags;
+    /**
+     *  @var boolean $is_private
+     */
+    public $is_private;
 
     /**
      * Constructor
@@ -161,7 +165,7 @@ class Broadcast extends database_object implements library_item
     public function update(array $data)
     {
         if (isset($data['edit_tags'])) {
-            Tag::update_tag_list($data['edit_tags'], 'broadcast', $this->id);
+            Tag::update_tag_list($data['edit_tags'], 'broadcast', $this->id, true);
         }
 
         $sql = "UPDATE `broadcast` SET `name` = ?, `description` = ?, `is_private` = ? " .
@@ -172,12 +176,14 @@ class Broadcast extends database_object implements library_item
         return $this->id;
     }
 
-    public function format()
+    public function format($details = true)
     {
         $this->f_name = $this->name;
         $this->f_link = '<a href="' . AmpConfig::get('web_path') . '/broadcast.php?id=' . $this->id . '">' . scrub_out($this->f_name) . '</a>';
-        $this->tags = Tag::get_top_tags('broadcast', $this->id);
-        $this->f_tags = Tag::get_display($this->tags, true, 'broadcast');
+        if ($details) {
+            $this->tags = Tag::get_top_tags('broadcast', $this->id);
+            $this->f_tags = Tag::get_display($this->tags, true, 'broadcast');
+        }
     }
 
     /**

@@ -3,7 +3,7 @@
 /**
  *
  * LICENSE: GNU General Public License, version 2 (GPLv2)
- * Copyright 2001 - 2014 Ampache.org
+ * Copyright 2001 - 2015 Ampache.org
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License v2
@@ -27,13 +27,34 @@
 abstract class playlist_object extends database_object implements library_item
 {
     // Database variables
+    /**
+     * @var int $id
+     */
     public $id;
+    /**
+     * @var string $name
+     */
     public $name;
+    /**
+     * @var int $user
+     */
     public $user;
+    /**
+     * @var string $type
+     */
     public $type;
 
+    /**
+     * @var string $f_type
+     */
     public $f_type;
+    /**
+     * @var string $f_name
+     */
     public $f_name;
+    /**
+     * @var string $f_user
+     */
     public $f_user;
 
     abstract public function get_items();
@@ -43,14 +64,15 @@ abstract class playlist_object extends database_object implements library_item
      * This takes the current playlist object and gussies it up a little
      * bit so it is presentable to the users
      */
-    public function format()
+    public function format($details = true)
     {
         $this->f_name =  $this->name;
         $this->f_type = ($this->type == 'private') ? UI::get_icon('lock', T_('Private')) : '';
 
-        $client = new User($this->user);
-
-        $this->f_user = $client->fullname;
+        if ($details) {
+            $client = new User($this->user);
+            $this->f_user = $client->fullname;
+        }
 
     } // format
 

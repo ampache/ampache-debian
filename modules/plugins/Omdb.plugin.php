@@ -3,7 +3,7 @@
 /**
  *
  * LICENSE: GNU General Public License, version 2 (GPLv2)
- * Copyright 2001 - 2014 Ampache.org
+ * Copyright 2001 - 2015 Ampache.org
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License v2
@@ -23,7 +23,9 @@
 class AmpacheOmdb {
 
     public $name           = 'Omdb';
+    public $categories     = 'metadata';
     public $description    = 'Omdb metadata integration';
+    public $url            = 'http://www.omdbapi.com';
     public $version        = '000001';
     public $min_ampache    = '370009';
     public $max_ampache    = '999999';
@@ -67,7 +69,7 @@ class AmpacheOmdb {
         if (!empty($year)) {
             $url .= '&y=' . rawurlencode($year);
         }
-        $request = Requests::get($url);
+        $request = Requests::get($url, array(), Core::requests_options());
         return json_decode($request->body);
     }
     

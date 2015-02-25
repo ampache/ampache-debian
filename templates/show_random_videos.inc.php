@@ -3,7 +3,7 @@
 /**
  *
  * LICENSE: GNU General Public License, version 2 (GPLv2)
- * Copyright 2001 - 2014 Ampache.org
+ * Copyright 2001 - 2015 Ampache.org
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License v2
@@ -48,7 +48,7 @@ if ($videos) {
         <?php } ?>
         </div>
         <?php
-        if (AmpConfig::get('ratings')) {
+        if (AmpConfig::get('ratings') && Access::check('interface', '25')) {
             echo "<div id=\"rating_" . $video->id . "_video\">";
             show_rating($video->id, 'video');
             echo "</div>";

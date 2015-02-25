@@ -3,7 +3,7 @@
 /**
  *
  * LICENSE: GNU General Public License, version 2 (GPLv2)
- * Copyright 2001 - 2014 Ampache.org
+ * Copyright 2001 - 2015 Ampache.org
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License v2
@@ -123,7 +123,7 @@ require $prefix . '/templates/install_header.inc.php';
     <div class="form-group" style="display: none;" id="specificpass">
         <label for="db_password" class="col-sm-4 control-label"><?php echo T_('Ampache Database User Password'); ?></label>
         <div class="col-sm-8">
-            <input type="password" class="form-control" id="db_password" name="db_password" placeholder="Password">
+            <input type="password" class="form-control" id="db_password" name="db_password" placeholder="Password (Required)">
         </div>
     </div>
     <div class="col-sm-4">

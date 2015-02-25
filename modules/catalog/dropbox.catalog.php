@@ -3,7 +3,7 @@
 /**
  *
  * LICENSE: GNU General Public License, version 2 (GPLv2)
- * Copyright 2001 - 2014 Ampache.org
+ * Copyright 2001 - 2015 Ampache.org
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License v2
@@ -128,6 +128,22 @@ class Catalog_dropbox extends Catalog
 
     }
 
+    public function isReady()
+    {
+        return (!empty($this->authtoken));
+    }
+
+    public function show_ready_process()
+    {
+        $this->showAuthToken();
+    }
+
+    public function perform_ready()
+    {
+        $this->authcode = $_REQUEST['authcode'];
+        $this->completeAuthToken();
+    }
+
     public $apikey;
     public $secret;
     public $path;
@@ -204,11 +220,12 @@ class Catalog_dropbox extends Catalog
         $webAuth = $this->getWebAuth();
         $authurl = $webAuth->start();
         echo "<br />Go to <strong><a href='" . $authurl . "' target='_blank'>" . $authurl . "</a></strong> to generate the authorization code, then enter it bellow.<br />";
-        echo "<form action='' method='post' enctype='multipart/form-data'>";
-        if ($_POST['action']) {
-            echo "<input type='hidden' name='action' value='add_to_catalog' />";
+        echo "<form action='" . get_current_path() . "' method='post' enctype='multipart/form-data'>";
+        if ($_REQUEST['action']) {
+            echo "<input type='hidden' name='action' value='" . scrub_in($_REQUEST['action']) . "' />";
             echo "<input type='hidden' name='catalogs[]' value='". $this->id ."' />";
         }
+        echo "<input type='hidden' name='perform_ready' value='true' />";
         echo "<input type='text' name='authcode' />";
         echo "<input type='submit' value='Ok' />";
         echo "</form>";
@@ -240,9 +257,13 @@ class Catalog_dropbox extends Catalog
             $this->authcode = $options['authcode'];
         }
 
-        UI::show_box_top(T_('Running Dropbox Remote Update') . '. . .');
+        if (!defined('SSE_OUTPUT')) {
+            UI::show_box_top(T_('Running Dropbox Remote Update') . '. . .');
+        }
         $this->update_remote_catalog();
-        UI::show_box_bottom();
+        if (!defined('SSE_OUTPUT')) {
+            UI::show_box_bottom();
+        }
 
         return true;
     } // add_to_catalog
@@ -279,16 +300,12 @@ class Catalog_dropbox extends Catalog
             $this->count = 0;
             $this->add_files($client, $this->path);
 
-            echo "\n<br />" .
-            printf(T_('Catalog Update Finished.  Total Media: [%s]'), $this->count);
-            echo '<br />';
+            UI::update_text('', sprintf(T_('Catalog Update Finished.  Total Media: [%s]'), $this->count));
             if ($this->count == 0) {
-                echo T_('No media updated, do you respect the patterns?') . '<br />';
+                Error::add('general', T_('No media updated, do you respect the patterns?'));
             }
-            echo '<br />';
         } else {
-            echo "<p>" . T_('API Error: cannot connect to Dropbox.') . "</p><hr />\n";
-            flush();
+            Error::add('general', T_('API Error: cannot connect to Dropbox.'));
         }
 
         return true;
@@ -321,8 +338,7 @@ class Catalog_dropbox extends Catalog
                 $this->add_file($client, $metadata);
             }
         } else {
-            echo "<p>" . T_('API Error: Cannot access file/folder at ' . $this->path . '.') . "</p><hr />\n";
-            flush();
+            Error::add('general', T_('API Error: Cannot access file/folder at ' . $this->path . '.'));
         }
     }
 
@@ -432,8 +448,7 @@ class Catalog_dropbox extends Catalog
                 }
             }
         } else {
-            echo "<p>" . T_('API Error: cannot connect to Dropbox.') . "</p><hr />\n";
-            flush();
+            Error::add('general', T_('API Error: cannot connect to Dropbox.'));
         }
 
         return $dead;
