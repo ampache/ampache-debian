@@ -1,8 +1,113 @@
 CHANGELOG
 =========
 
+3.8.1
+----------
+- Fixed PHP7 Error class conflict (thanks trampi)
+- Fixed user password with special characters at install time (thanks jagerman)
+- Moved Ampache project license from GPLv2 to AGPLv3
+- Add Ampache specific information on Subsonic API getAlbum using a new `ampache` parameter (thanks nicklan)
+- Added 'album tag' option in song search (thanks DanielMaly)
+- Added Message of the Day plugin to display MOTD at home page
+- Moved AmpacheApi class to a separate ampacheapi-php git repository
+- Added timeline / friends timeline feature
+- Fixed disabled song display to regular users (thanks shangril)
+- Fixed random albums art size (thanks Bidules079)
+- Moved tag cloud to artist browsing by default
+- Fixed utf8 BOM empty string on song comparison
+- Improved recently played and user stats queries performance (thanks thinca)
+- Renamed SAMPLE_RATE to TRANSCODE_BITRATE on transcoding
+- Fixed tag deletion sql error (thanks stebe)
+- Moved to PNG default blank image instead of JPG (thanks Psy-Virus)
+- Fixed temporary playlist initial position when scrolling down (thanks RobertoCarlo)
+- Added Radio stations to UPnP backend
+- Fixed Subsonic API art to use album art if song doesn't have a custom art (thanks hypfvieh)
+- Fixed Subsonic API search when object count parameter is 0 (thanks hypfvieh)
+- Fixed UPnP UUID to be based on host information
+- Moved to Composer for dependencies management
+- Fixed catalog action when not using Ajax page loading (thanks Razrael)
+- Fixed unrated song default value (thanks Combustible)
+- Added custom metadata support from files (thanks Razrael)
+- Improved Subsonic API getArtists performance (thanks nicklan)
+- Fixed theme color setting behavior
+- Moved audioscrobbler API to v2
+- Added m3u8 playlist import
+- Fixed utf8 id3v2 comments support
+- Added write_playlists script to export playlists to file
+- Fixed Tvdb and Tmdb plugins (thanks wagnered)
+- Improved Video filename parsing (thanks wagnered)
+- Fixed non scalar settings value printing on debug page
+- Improved Subsonic API getAlbumList error handling
+- Fixed user login with browser used during the installation
+- Fixed iTunes 12 browsing when using DAAP (thanks Chattaway83)
+- Moved http_port user preference to ampache.cfg.php
+- Upgraded last.fm and libre.fm scrobbling to latest API version (thanks nioc)
+- Added missing space between track and album in localplay playlist (thanks arnaudbey)
+- Added check fo mbstring.func_overload support before using id3 write functionality (thanks anonymous2ch)
+- Fixed file size calculation when using id3v2 tag (thanks hypfvieh)
+- Added rating from id3 tag (thanks nioc)
+- Added track number on streaming playlist (thanks Fondor1)
+- Fixed catalog export (thanks shellshocker)
+- Fixed file change detection
+- Improved XML API with more information and new functions (advanced_search, toggle_follow, last_shouts, rate, timeline, friends_timeline)
+- Fixed 'Next' button when browsing start offset is aligned to offset limit (thanks wagnered)
+- Fixed stream kill OS detection (thanks nan4k7)
+- Fixed calculate_art_size script to support storage on disk (thanks nan4k7)
+- Fixed sql script semicolon typo (thanks jack)
+- Added support for .opus files (thanks mrpi)
+- Fixed podcast owner xml information
+- Fixed ldap filter parameter check (thanks ChrGeiss)
+- Fixed 'Add to existing playlist' link for regular users (thanks Niols)
+
 3.8.0
 ----------
+- Added Portuguese (Brasil) language (thanks Ione Souza Junior)
+- Updated PHPMailer version to 5.2.10
+- Fixed user stats clear
+- Added user, followers and last shouts XML API functions
+- Fixed transcoded process end on some systems (thanks nan4k7)
+- Added ogg channel streaming support (thanks Deathcow)
+- Fixed sql connection close before stream (thanks fufroma)
+- Added support for several ldap filters (thanks T-Rock)
+- Fixed 'Add to existing playlist' button on web player (thanks RyanCopley)
+- Added 'add to existing playlist' link on album page (thanks RyanCopley)
+- Added option to hide user fullname from other users
+- Added playlist track information in Apache XML API (thanks RyanCopley)
+- Fixed playlist remove song in Apache XML API (thanks RyanCopley)
+- Fixed SubSonic API ifModifiedSince information
+- Added Podcast links to albums / artists
+- Added Piwik and Google Analytics plugins
+- Added Apache 2.4 access control declaration in htaccess files
+- Fixed performance issues on user preferences
+- Added artist search by year and place
+- Fixed search by comment (thanks malkavi)
+- Added Paypal and Flattr plugins
+- Added .maintenance page
+- Fixed captcha
+- Added private messages between users
+- Fixed SubSonic API rating information on albums and songs
+- Added latest artists and shouts RSS feeds
+- Fixed tag cloud ordering
+- Added Label entities associated to artists / users
+- Added WebDAV backend
+- Fixed SubSonic API requests with musicFolderId parameter (thanks dhsc19)
+- Added footer text edition setting
+- Added uploaded artist list on user page
+- Added custom Ampache login logo and favicon support
+- Added edition support on shared objects (thanks dhsc19)
+- Fixed share feature on videos (thanks RobertoCarlo)
+- Removed album year display from album name if unset
+- Fixed Subsonic API Album/Artist song's link (thanks dhsc19 and daneren2005)
+- Added mysql database socket authentication support on web setup (thanks AsavarTzeth)
+- Fixed artist art url for mobile use (thanks dhsc19)
+- Added Shoutbox home plugin
+- Added catalog favorites home plugin
+- Fixed search by rating (thanks iamnumbersix)
+- Added UPnP localplay (thanks SeregaPru)
+- Changed preferences to return the global value if preference is missing for the searched user
+- Fixed special chars in songs names and tags (thanks SeregaPru) 
+- Fixed Subsonic API playlist edition/delation (thanks dhsc19)
+- Fixed integer default value in Apache XML API
 - Fixed image thumb on webplayer and search preview (thanks RobertoCarlo and eephyne)
 - Fixed proxy setting on all external http requests (thanks brendankearney)
 - Added QRCode view of user API key 

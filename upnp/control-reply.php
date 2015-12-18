@@ -10,7 +10,7 @@ if (!AmpConfig::get('upnp_backend')) {
 set_time_limit(600);
 
 header ("Content-Type: text/html; charset=UTF-8");
-$rootMediaItems = array();
+$rootMediaItems   = array();
 $rootMediaItems[] = Upnp_Api::_musicMetadata('');
 $rootMediaItems[] = Upnp_Api::_videoMetadata('');
 
@@ -18,20 +18,20 @@ $rootMediaItems[] = Upnp_Api::_videoMetadata('');
     $requestRaw = file_get_contents('php://input');
     if ($requestRaw != '') {
         $upnpRequest = Upnp_Api::parseUPnPRequest($requestRaw);
-        debug_event('upnp', 'Request: ' . $requestRaw, '5');
+        //!!debug_event('upnp', 'Request: ' . $requestRaw, '5');
     } else {
         echo 'Error: no UPnP request.';
         debug_event('upnp', 'No request', '5');
         exit;
     }
 
-    $items = array();
-    $totMatches = 0;
+    $items        = array();
+    $totMatches   = 0;
     $responseType = "u:Error";
     switch ($upnpRequest['action']) {
         case 'search':
             $responseType = 'u:SearchResponse';
-            $items = Upnp_Api::_callSearch($upnpRequest['searchcriteria']);
+            $items        = Upnp_Api::_callSearch($upnpRequest['searchcriteria']);
             break;
         case 'browse':
             $responseType = 'u:BrowseResponse';
@@ -41,9 +41,9 @@ $rootMediaItems[] = Upnp_Api::_videoMetadata('');
                 if ($upnpRequest['browseflag'] == 'BrowseMetadata') {
                     $items[] = array(
                         'id'            => '0',
-                        'parentID'        => '-1',
+                        'parentID'      => '-1',
                         'childCount'    => '2',
-                        'dc:title'        => T_('root'),
+                        'dc:title'      => T_('root'),
                         'upnp:class'    => 'object.container',
                     );
                 } else {
@@ -89,10 +89,10 @@ $rootMediaItems[] = Upnp_Api::_videoMetadata('');
     $totMatches = ($totMatches == 0) ? count($items) : $totMatches;
     if ($items == null || $totMatches == 0) {
         $domDIDL = Upnp_Api::createDIDL('');
-        $numRet = 0;
+        $numRet  = 0;
     } else {
         $domDIDL = Upnp_Api::createDIDL($items);
-        $numRet = count($items);
+        $numRet  = count($items);
     }
 
     $xmlDIDL = $domDIDL->saveXML();
@@ -100,5 +100,5 @@ $rootMediaItems[] = Upnp_Api::_videoMetadata('');
     $soapXML = $domSOAP->saveXML();
 
     echo $soapXML;
-    debug_event('upnp', 'Response: ' . $soapXML, '5');
+    //!!debug_event('upnp', 'Response: ' . $soapXML, '5');
 ?>

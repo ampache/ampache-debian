@@ -60,12 +60,12 @@ CREATE TABLE IF NOT EXISTS `access_list` (
 --
 
 INSERT INTO `access_list` (`id`, `name`, `start`, `end`, `level`, `type`, `user`, `enabled`) VALUES
-(1, 'DEFAULTv4', '\0\0\0\0', 'ÿÿÿÿ', 75, 'interface', -1, 1),
-(2, 'DEFAULTv4', '\0\0\0\0', 'ÿÿÿÿ', 75, 'stream', -1, 1),
-(3, 'DEFAULTv4', '\0\0\0\0', 'ÿÿÿÿ', 75, 'rpc', -1, 1),
-(4, 'DEFAULTv6', '\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0', 'ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ', 75, 'interface', -1, 1),
-(5, 'DEFAULTv6', '\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0', 'ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ', 75, 'stream', -1, 1),
-(6, 'DEFAULTv6', '\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0', 'ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ', 75, 'rpc', -1, 1);
+(1, 'DEFAULTv4', '\0\0\0\0', 0xffffffff, 75, 'interface', -1, 1),
+(2, 'DEFAULTv4', '\0\0\0\0', 0xffffffff, 75, 'stream', -1, 1),
+(3, 'DEFAULTv4', '\0\0\0\0', 0xffffffff, 75, 'rpc', -1, 1),
+(4, 'DEFAULTv6', '\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0', 0xffffffffffffffff, 75, 'interface', -1, 1),
+(5, 'DEFAULTv6', '\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0', 0xffffffffffffffff, 75, 'stream', -1, 1),
+(6, 'DEFAULTv6', '\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0', 0xffffffffffffffff, 75, 'rpc', -1, 1);
 
 -- --------------------------------------------------------
 
@@ -325,19 +325,20 @@ CREATE TABLE IF NOT EXISTS `license` (
 --
 
 INSERT INTO `license` (`id`, `name`, `description`, `external_link`) VALUES
-(1, 'CC BY', NULL, 'https://creativecommons.org/licenses/by/3.0/'),
-(2, 'CC BY NC', NULL, 'https://creativecommons.org/licenses/by-nc/3.0/'),
-(3, 'CC BY NC ND', NULL, 'https://creativecommons.org/licenses/by-nc-nd/3.0/'),
-(4, 'CC BY NC SA', NULL, 'https://creativecommons.org/licenses/by-nc-sa/3.0/'),
-(5, 'CC BY ND', NULL, 'https://creativecommons.org/licenses/by-nd/3.0/'),
-(6, 'CC BY SA', NULL, 'https://creativecommons.org/licenses/by-sa/3.0/'),
-(7, 'Licence Art Libre', NULL, 'http://artlibre.org/licence/lal/'),
-(8, 'Yellow OpenMusic', NULL, 'http://openmusic.linuxtag.org/yellow.html'),
-(9, 'Green OpenMusic', NULL, 'http://openmusic.linuxtag.org/green.html'),
-(10, 'Gnu GPL Art', NULL, 'http://gnuart.org/english/gnugpl.html'),
-(11, 'WTFPL', NULL, 'https://en.wikipedia.org/wiki/WTFPL'),
-(12, 'FMPL', NULL, 'http://www.fmpl.org/fmpl.html'),
-(13, 'C Reaction', NULL, 'http://morne.free.fr/Necktar7/creaction.htm');
+(1, '_default', NULL, ''),
+(2, 'CC BY', NULL, 'https://creativecommons.org/licenses/by/3.0/'),
+(3, 'CC BY NC', NULL, 'https://creativecommons.org/licenses/by-nc/3.0/'),
+(4, 'CC BY NC ND', NULL, 'https://creativecommons.org/licenses/by-nc-nd/3.0/'),
+(5, 'CC BY NC SA', NULL, 'https://creativecommons.org/licenses/by-nc-sa/3.0/'),
+(6, 'CC BY ND', NULL, 'https://creativecommons.org/licenses/by-nd/3.0/'),
+(7, 'CC BY SA', NULL, 'https://creativecommons.org/licenses/by-sa/3.0/'),
+(8, 'Licence Art Libre', NULL, 'http://artlibre.org/licence/lal/'),
+(9, 'Yellow OpenMusic', NULL, 'http://openmusic.linuxtag.org/yellow.html'),
+(10, 'Green OpenMusic', NULL, 'http://openmusic.linuxtag.org/green.html'),
+(11, 'Gnu GPL Art', NULL, 'http://gnuart.org/english/gnugpl.html'),
+(12, 'WTFPL', NULL, 'https://en.wikipedia.org/wiki/WTFPL'),
+(13, 'FMPL', NULL, 'http://www.fmpl.org/fmpl.html'),
+(14, 'C Reaction', NULL, 'http://morne.free.fr/Necktar7/creaction.htm');
 
 -- --------------------------------------------------------
 
@@ -567,11 +568,10 @@ CREATE TABLE IF NOT EXISTS `preference` (
 INSERT INTO `preference` (`id`, `name`, `value`, `description`, `level`, `type`, `catagory`) VALUES
 (1, 'download', '1', 'Allow Downloads', 100, 'boolean', 'options'),
 (4, 'popular_threshold', '10', 'Popular Threshold', 25, 'integer', 'interface'),
-(19, 'sample_rate', '32', 'Transcode Bitrate', 25, 'string', 'streaming'),
+(19, 'transcode_bitrate', '64', 'Transcode Bitrate', 25, 'string', 'streaming'),
 (22, 'site_title', 'Ampache :: For the love of Music', 'Website Title', 100, 'string', 'system'),
 (23, 'lock_songs', '0', 'Lock Songs', 100, 'boolean', 'system'),
 (24, 'force_http_play', '0', 'Forces Http play regardless of port', 100, 'boolean', 'system'),
-(25, 'http_port', '80', 'Non-Standard Http Port', 100, 'integer', 'system'),
 (41, 'localplay_controller', '0', 'Localplay Type', 100, 'special', 'options'),
 (29, 'play_type', 'web_player', 'Type of Playback', 25, 'special', 'streaming'),
 (31, 'lang', 'fr_FR', 'Language', 100, 'special', 'interface'),
@@ -590,20 +590,16 @@ INSERT INTO `preference` (`id`, `name`, `value`, `description`, `level`, `type`,
 (70, 'mpd_active', '0', 'MPD Active Instance', 25, 'integer', 'internal'),
 (71, 'httpq_active', '0', 'HTTPQ Active Instance', 25, 'integer', 'internal'),
 (72, 'shoutcast_active', '0', 'Shoutcast Active Instance', 25, 'integer', 'internal'),
-(73, 'lastfm_user', '', 'Last.FM Username', 25, 'string', 'plugins'),
-(74, 'lastfm_md5_pass', '', 'Last.FM Password', 25, 'string', 'plugins'),
-(75, 'lastfm_port', '', 'Last.FM Submit Port', 25, 'string', 'internal'),
-(76, 'lastfm_host', '', 'Last.FM Submit Host', 25, 'string', 'internal'),
-(77, 'lastfm_url', '', 'Last.FM Submit URL', 25, 'string', 'internal'),
+(77, 'lastfm_grant_link', '', 'Last.FM Grant URL', 25, 'string', 'internal'),
 (78, 'lastfm_challenge', '', 'Last.FM Submit Challenge', 25, 'string', 'internal'),
-(102, 'share', '0', 'Allow Share', 25, 'boolean', 'system'),
+(102, 'share', '0', 'Allow Share', 100, 'boolean', 'system'),
 (123, 'ajax_load', '1', 'Ajax page load', 25, 'boolean', 'interface'),
 (82, 'now_playing_per_user', '1', 'Now playing filtered per user', 50, 'boolean', 'interface'),
 (83, 'album_sort', '0', 'Album Default Sort', 25, 'string', 'interface'),
 (84, 'show_played_times', '0', 'Show # played', 25, 'string', 'interface'),
 (85, 'song_page_title', '1', 'Show current song in Web player page title', 25, 'boolean', 'interface'),
-(86, 'subsonic_backend', '1', 'Use SubSonic backend', 25, 'boolean', 'system'),
-(87, 'plex_backend', '0', 'Use Plex backend', 25, 'boolean', 'system'),
+(86, 'subsonic_backend', '1', 'Use SubSonic backend', 100, 'boolean', 'system'),
+(87, 'plex_backend', '0', 'Use Plex backend', 100, 'boolean', 'system'),
 (88, 'webplayer_flash', '1', 'Authorize Flash Web Player(s)', 25, 'boolean', 'streaming'),
 (89, 'webplayer_html5', '1', 'Authorize HTML5 Web Player(s)', 25, 'boolean', 'streaming'),
 (90, 'allow_personal_info_now', '1', 'Personal information visibility - Now playing', 25, 'boolean', 'interface'),
@@ -617,8 +613,8 @@ INSERT INTO `preference` (`id`, `name`, `value`, `description`, `level`, `type`,
 (98, 'autoupdate_lastversion_new', '', 'AutoUpdate last version from last check is newer', 25, 'boolean', 'internal'),
 (99, 'webplayer_confirmclose', '0', 'Confirmation when closing current playing window', 25, 'boolean', 'interface'),
 (100, 'webplayer_pausetabs', '1', 'Auto-pause betweens tabs', 25, 'boolean', 'interface'),
-(101, 'stream_beautiful_url', '0', 'Use beautiful stream url', 25, 'boolean', 'streaming'),
-(103, 'share_expire', '7', 'Share links default expiration days (0=never)', 25, 'integer', 'system'),
+(101, 'stream_beautiful_url', '0', 'Enable url rewriting', 100, 'boolean', 'streaming'),
+(103, 'share_expire', '7', 'Share links default expiration days (0=never)', 100, 'integer', 'system'),
 (104, 'slideshow_time', '0', 'Artist slideshow inactivity time', 25, 'integer', 'interface'),
 (105, 'broadcast_by_default', '0', 'Broadcast web player by default', 25, 'boolean', 'streaming'),
 (106, 'concerts_limit_future', '0', 'Limit number of future events', 25, 'integer', 'interface'),
@@ -627,16 +623,16 @@ INSERT INTO `preference` (`id`, `name`, `value`, `description`, `level`, `type`,
 (109, 'topmenu', '0', 'Top menu', 25, 'boolean', 'interface'),
 (110, 'demo_clear_sessions', '0', 'Clear democratic votes of expired user sessions', 25, 'boolean', 'playlist'),
 (111, 'show_donate', '1', 'Show donate button in footer', 25, 'boolean', 'interface'),
-(112, 'upload_catalog', '-1', 'Uploads catalog destination', 25, 'integer', 'system'),
-(113, 'allow_upload', '0', 'Allow users to upload media', 25, 'boolean', 'system'),
-(114, 'upload_subdir', '1', 'Upload: create a subdirectory per user (recommended)', 25, 'boolean', 'system'),
-(115, 'upload_user_artist', '0', 'Upload: consider the user sender as the track''s artist', 25, 'boolean', 'system'),
-(116, 'upload_script', '', 'Upload: run the following script after upload (current directory = upload target directory)', 25, 'string', 'system'),
-(117, 'upload_allow_edit', '1', 'Upload: allow users to edit uploaded songs', 25, 'boolean', 'system'),
-(118, 'daap_backend', '0', 'Use DAAP backend', 25, 'boolean', 'system'),
-(119, 'daap_pass', '', 'DAAP backend password', 25, 'string', 'system'),
-(120, 'upnp_backend', '0', 'Use UPnP backend', 25, 'boolean', 'system'),
-(121, 'allow_video', '1', 'Allow video features', 25, 'integer', 'system'),
+(112, 'upload_catalog', '-1', 'Uploads catalog destination', 75, 'integer', 'system'),
+(113, 'allow_upload', '0', 'Allow users to upload media', 75, 'boolean', 'system'),
+(114, 'upload_subdir', '1', 'Upload: create a subdirectory per user (recommended)', 75, 'boolean', 'system'),
+(115, 'upload_user_artist', '0', 'Upload: consider the user sender as the track''s artist', 75, 'boolean', 'system'),
+(116, 'upload_script', '', 'Upload: run the following script after upload (current directory = upload target directory)', 75, 'string', 'system'),
+(117, 'upload_allow_edit', '1', 'Upload: allow users to edit uploaded songs', 75, 'boolean', 'system'),
+(118, 'daap_backend', '0', 'Use DAAP backend', 100, 'boolean', 'system'),
+(119, 'daap_pass', '', 'DAAP backend password', 100, 'string', 'system'),
+(120, 'upnp_backend', '0', 'Use UPnP backend', 100, 'boolean', 'system'),
+(121, 'allow_video', '1', 'Allow video features', 75, 'integer', 'system'),
 (122, 'album_release_type', '1', 'Album - Group per release type', 25, 'boolean', 'interface'),
 (124, 'direct_play_limit', '0', 'Limit direct play to maximum media count', 25, 'integer', 'interface'),
 (125, 'home_moment_albums', '1', 'Show Albums of the moment at home page', 25, 'integer', 'interface'),
@@ -649,7 +645,15 @@ INSERT INTO `preference` (`id`, `name`, `value`, `description`, `level`, `type`,
 (132, 'browser_notify_timeout', '10', 'WebPlayer browser notifications timeout (seconds)', 25, 'integer', 'interface'),
 (133, 'geolocation', '0', 'Allow geolocation', 25, 'integer', 'options'),
 (134, 'webplayer_aurora', '1', 'Authorize JavaScript decoder (Aurora.js) in Web Player(s)', 25, 'boolean', 'streaming'),
-(135, 'upload_allow_remove', '1', 'Upload: allow users to remove uploaded songs', 25, 'boolean', 'system');
+(135, 'upload_allow_remove', '1', 'Upload: allow users to remove uploaded songs', 75, 'boolean', 'system'),
+(136, 'custom_login_logo', '', 'Custom login page logo url', 75, 'string', 'interface'),
+(137, 'custom_favicon', '', 'Custom favicon url', 75, 'string', 'interface'),
+(138, 'custom_text_footer', '', 'Custom text footer', 75, 'string', 'interface'),
+(139, 'webdav_backend', '0', 'Use WebDAV backend', 100, 'boolean', 'system'),
+(140, 'notify_email', '0', 'Receive notifications by email (shouts, private messages, ...)', 25, 'boolean', 'options'),
+(141, 'theme_color', 'dark', 'Theme color', 0, 'special', 'interface'),
+(142, 'disabled_custom_metadata_fields', '', 'Disable custom metadata fields (ctrl / shift click to select multiple)', 100, 'string', 'system'),
+(143, 'disabled_custom_metadata_fields_input', '', 'Disable custom metadata fields. Insert them in a comma separated list. They will add to the fields selected above.', 100, 'string', 'system');
 
 -- --------------------------------------------------------
 
@@ -902,6 +906,7 @@ CREATE TABLE IF NOT EXISTS `stream_playlist` (
   `type` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `time` smallint(5) DEFAULT NULL,
   `codec` varchar(32) CHARACTER SET utf8 DEFAULT NULL,
+  `track_num` smallint(5) DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `sid` (`sid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
@@ -1068,8 +1073,8 @@ CREATE TABLE IF NOT EXISTS `update_info` (
 --
 
 INSERT INTO `update_info` (`key`, `value`) VALUES
-('db_version', '370030'),
-('Plugin_Last.FM', '000004');
+('db_version', '370041'),
+('Plugin_Last.FM', '000005');
 
 -- --------------------------------------------------------
 
@@ -1093,6 +1098,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `validation` varchar(128) CHARACTER SET utf8 DEFAULT NULL,
   `state` varchar(64) CHARACTER SET utf8 DEFAULT NULL,
   `city` varchar(64) CHARACTER SET utf8 DEFAULT NULL,
+  `fullname_public` tinyint(1) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
@@ -1180,10 +1186,6 @@ INSERT INTO `user_preference` (`user`, `preference`, `value`) VALUES
 (-1, 70, '0'),
 (-1, 71, '0'),
 (-1, 72, '0'),
-(-1, 73, ''),
-(-1, 74, ''),
-(-1, 75, ''),
-(-1, 76, ''),
 (-1, 77, ''),
 (-1, 78, ''),
 (-1, 114, '1'),
@@ -1240,6 +1242,14 @@ INSERT INTO `user_preference` (`user`, `preference`, `value`) VALUES
 (-1, 133, '0'),
 (-1, 134, '1'),
 (-1, 135, '1'),
+(-1, 136, ''),
+(-1, 137, ''),
+(-1, 138, ''),
+(-1, 139, '0'),
+(-1, 140, '0'),
+(-1, 141, 'dark'),
+(-1, 142, ''),
+(-1, 143, ''),
 (-1, 96, ''),
 (-1, 97, ''),
 (-1, 98, '');
@@ -1342,6 +1352,129 @@ CREATE TABLE IF NOT EXISTS `wanted` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_wanted` (`user`,`artist`,`mbid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `label`
+--
+
+DROP TABLE IF EXISTS `label`;
+CREATE TABLE IF NOT EXISTS `label` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(80) NOT NULL,
+  `category` varchar(40) NULL,
+  `summary` TEXT CHARACTER SET utf8 NULL,
+  `address` varchar(256) NULL,
+  `email` varchar(128) NULL,
+  `website` varchar(256) NULL,
+  `user` int(11) unsigned NULL,
+  `creation_date` int(11) unsigned NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `label_asso`
+--
+
+DROP TABLE IF EXISTS `label_asso`;
+CREATE TABLE IF NOT EXISTS `label_asso` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `label` int(11) unsigned NOT NULL,
+  `artist` int(11) unsigned NOT NULL,
+  `creation_date` int(11) unsigned NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_pvmsg`
+--
+
+DROP TABLE IF EXISTS `user_pvmsg`;
+CREATE TABLE IF NOT EXISTS `user_pvmsg` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `subject` varchar(80) NOT NULL,
+  `message` TEXT CHARACTER SET utf8 NULL,
+  `from_user` int(11) unsigned NOT NULL,
+  `to_user` int(11) unsigned NOT NULL,
+  `is_read` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `creation_date` int(11) unsigned NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_follower`
+--
+
+DROP TABLE IF EXISTS `user_follower`;
+CREATE TABLE IF NOT EXISTS `user_follower` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user` int(11) unsigned NOT NULL,
+  `follow_user` int(11) unsigned NOT NULL,
+  `follow_date` int(11) unsigned  NULL,
+  `creation_date` int(11) unsigned NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_activity`
+--
+
+DROP TABLE IF EXISTS `user_activity`;
+CREATE TABLE IF NOT EXISTS `user_activity` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user` int(11) unsigned NOT NULL,
+  `action` varchar(20) NOT NULL,
+  `object_id` int(11) unsigned NOT NULL,
+  `object_type` varchar(32) NOT NULL,
+  `activity_date` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `metadata_field`
+--
+
+DROP TABLE IF EXISTS `metadata_field`;
+CREATE TABLE IF NOT EXISTS `metadata_field` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `public` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `metadata`
+--
+
+DROP TABLE IF EXISTS `metadata`;
+CREATE TABLE IF NOT EXISTS `metadata` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `object_id` int(11) unsigned NOT NULL,
+  `field` int(11) unsigned NOT NULL,
+  `data` text COLLATE utf8_unicode_ci NOT NULL,
+  `type` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  KEY `field` (`field`),
+  KEY `object_id` (`object_id`),
+  KEY `type` (`type`),
+  KEY `objecttype` (`object_id`,`type`),
+  KEY `objectfield` (`object_id`,`field`,`type`),
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

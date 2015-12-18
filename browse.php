@@ -2,21 +2,21 @@
 /* vim:set softtabstop=4 shiftwidth=4 expandtab: */
 /**
  *
- * LICENSE: GNU General Public License, version 2 (GPLv2)
+ * LICENSE: GNU Affero General Public License, version 3 (AGPLv3)
  * Copyright 2001 - 2015 Ampache.org
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License v2
- * as published by the Free Software Foundation.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * GNU Affero General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
 
@@ -55,6 +55,8 @@ switch ($_REQUEST['action']) {
     case 'movie':
     case 'clip':
     case 'personal_video':
+    case 'label':
+    case 'pvmsg':
         $browse->set_type($_REQUEST['action']);
         $browse->set_simple_browse(true);
     break;
@@ -81,20 +83,20 @@ switch ($_REQUEST['action']) {
         //FIXME: This whole thing is ugly, even though it works.
         $browse->set_sort('count','ASC');
         // This one's a doozy
-        $browse_type = isset($_REQUEST['type']) ? $_REQUEST['type'] : 'song';
+        $browse_type = isset($_REQUEST['type']) ? $_REQUEST['type'] : 'artist';
         $browse->set_simple_browse(false);
-        $browse->save_objects(Tag::get_tags($browse_type /*, AmpConfig::get('offset_limit')*/));   // Should add a pager?
+        $browse->save_objects(Tag::get_tags($browse_type, 0, 'name'));   // Should add a pager?
         $object_ids = $browse->get_saved();
-        $keys = array_keys($object_ids);
+        $keys       = array_keys($object_ids);
         Tag::build_cache($keys);
         UI::show_box_top(T_('Tag Cloud'), 'box box_tag_cloud');
         $browse2 = new Browse();
         $browse2->set_type($browse_type);
         $browse2->store();
-        require_once AmpConfig::get('prefix') . '/templates/show_tagcloud.inc.php';
+        require_once AmpConfig::get('prefix') . UI::find_template('show_tagcloud.inc.php');
         UI::show_box_bottom();
         $type = $browse2->get_type();
-        require_once AmpConfig::get('prefix') . '/templates/browse_content.inc.php';
+        require_once AmpConfig::get('prefix') . UI::find_template('browse_content.inc.php');
     break;
     case 'artist':
         $browse->set_filter('catalog',$_SESSION['catalog']);
@@ -181,6 +183,25 @@ switch ($_REQUEST['action']) {
         $browse->update_browse_from_session();
         $browse->show_objects();
     break;
+    case 'label':
+        if (AmpConfig::get('catalog_disable')) {
+            $browse->set_filter('catalog_enabled', '1');
+        }
+        $browse->set_sort('name','ASC');
+        $browse->update_browse_from_session();
+        $browse->show_objects();
+        break;
+    case 'pvmsg':
+        $browse->set_sort('creation_date','DESC');
+        $folder = $_REQUEST['folder'];
+        if ($folder === "sent") {
+            $browse->set_filter('user', $GLOBALS['user']->id);
+        } else {
+            $browse->set_filter('to_user', $GLOBALS['user']->id);
+        }
+        $browse->update_browse_from_session();
+        $browse->show_objects();
+        break;
     default:
 
     break;

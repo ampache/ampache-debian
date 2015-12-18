@@ -135,6 +135,10 @@
     border: 2px solid #ffc763;
 }
 
+.edit_dialog_content .metadataAccordion {
+	display: none;
+}
+
 /***********************************************
            jQuery add to playlist dialog                         
 ***********************************************/
@@ -150,6 +154,7 @@
     border-radius: 2px;
     border-color: #1d1d1d;
     border: 2px solid rgba(0,0,0,0.15);
+    z-index: 10000;
 }
 
 .playlistdialogstyle.ui-widget-content a {
