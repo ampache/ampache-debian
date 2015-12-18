@@ -1,4 +1,10 @@
-ampache (3.7.1-develop1-1) UNRELEASED; urgency=low
+ampache (3.8.1-1) unstable; urgency=low
+
+  * New upstream version
+
+ -- Afterster <afterster@gmail.com>  Sun, 18 Dec 2015 23:38:00 +0200
+
+ampache (3.7.1-develop1-1) unstable; urgency=low
 
   * New upstream snapshot
   * Switch to dpkg-source 3.0 (quilt) format

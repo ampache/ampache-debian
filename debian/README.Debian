@@ -17,10 +17,6 @@ sysmlinks to some needed system libs.  Additional packages that are needed:
 	php5-mysql
 	php5-xmlrpc
 	php-gettext
-	libjs-prototype
-	libnusoap-php
-	libphp-phpmailer
-	libphp-snoopy
 
 Users/sys admins will have to make the appropriate sysmlinks to the above
 mentioned packages for ampache to work properly.
@@ -34,52 +30,8 @@ mentioned packages for ampache to work properly.
 /usr/share/ampache/www/docs/CHANGELOG.gz =>
 /usr/share/doc/ampache/changelog.gz
 
-/usr/share/javascript/prototype/prototype.js =>
-/usr/share/ampache/www/modules/prototype/prototype.js
-
-/usr/share/php/libphp-snoopy/Snoopy.class.php =>
-/usr/share/ampache/www/modules/infotools/Snoopy.class.php
-
-/usr/share/php/libphp-phpmailer/class.phpmailer.php =>
-/usr/share/ampache/www/modules/phpmailer/class.phpmailer.php
-
-/usr/share/php/libphp-phpmailer/class.smtp.php =>
-/usr/share/ampache/www/modules/phpmailer/class.smtp.php
-
-/usr/share/php/nusoap/nusoap.php =>
-/usr/share/ampache/www/modules/nusoap/nusoap.php
-
-/usr/share/php/nusoap/nusoapmime.php =>
-/usr/share/ampache/www/modules/nusoap/nusoapmime.php
-
-/usr/share/php/nusoap/class.wsdlcache.php =>
-/usr/share/ampache/www/modules/nusoap/class.wsdlcache.php
-
 /usr/share/php/php-gettext/streams.php =>
 /usr/share/ampache/www/modules/php-gettext/streams.php
-
-XSPF JUKEBOX FLASH PLAYER NOTE:
-
-Currently the XSPF Jukebox Flash player has been removed until an appropriate
-solution can be found to compile xspf_jukebox.fla at build time.  
-
-To get the Flash player working you have three options. 
-
-a) in a terminal run :~$/bin/bash /usr/share/ampache/www/bin/get_xspf.sh
-
-b) Download the source from Lacy Morrows website 
-http://lacymorrow.com/projects/jukebox/source.zip
-unzip the source and place xspf_jukebox.swf into 
-/usr/share/ampache/www/modules/flash
-
-c) or checkout the bzr or git branches of ampache
-
-bzr branch lp:ampache
-or
-git://gitorious.org/ampache/ampache.git
-
-then place xspf_jukebox.swf into /usr/share/ampache/www/modules/flash
-This will allow the Flash player to work again.  Sorry for the inconvenience.
 
 APACHE2-MPM-ITK
 
@@ -376,16 +328,7 @@ to Ampache which are not defined here. Catalog Updates will not be performed
 if there are any non-official Plugins currently installed.
 
 For installation question and/or questions on how to enable additional
-features in ampache please visit the forums, wiki and IRC
+features in ampache please visit the group, wiki and IRC
 
-http://ampache.org/wiki/
-http://ampache.org/forums/
-http://ampache.org/bugs/
-https://svn.ampache.org
+http://ampache.org
 IRC Freenode #ampache
-
-For .deb daily builds of ampache please have a look at:
-
-https://edge.launchpad.net/~cjsmo/+archive/ppa
-
- -- Charlie Smotherman <cjsmo@cableone.net>  Tue,  27 Apr 2010 09:30:14 -0500

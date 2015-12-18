@@ -15,6 +15,7 @@ sql         usr/share/ampache/www
 templates   usr/share/ampache/www
 themes      usr/share/ampache/www
 upnp        usr/share/ampache/www
+webdav      usr/share/ampache/www
 *php        usr/share/ampache/www
 *ico        usr/share/ampache/www
 *xml        usr/share/ampache/www

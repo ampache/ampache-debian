@@ -8,15 +8,8 @@ Build-Depends: debhelper (>= 8.1.0),
  apache2-dev,
  ucf,
  dh-linktree,
- libjs-jquery,
- libjs-jquery-jplayer,
- libjs-jquery-cookie,
- libjs-jquery-ui,
  php-gettext,
- libphp-phpmailer,
- ttf-freefont,
- php-getid3,
- php-openid
+ ttf-freefont
 Standards-Version: 3.9.4
 Vcs-Git: https://github.com/ampache/ampache.git
 Vcs-browser: https://github.com/ampache/ampache
@@ -28,14 +21,14 @@ Pre-Depends: dpkg (>= 1.15.7.2)
 Depends: ${misc:Depends},
  debconf (>= 0.5) | debconf-2.0,
  libapache2-mod-php5 | php5,
- ampache-common (>= 3.7.1-develop1-1),
+ ampache-common (>= 3.8.1-1),
  php5-cli,
  php5-mysql,
  php5-xmlrpc,
  php5-json,
  ucf
-Replaces: ampache (<< 3.7.1-develop1-1)
-Breaks: ampache (<< 3.7.1-develop1-1)
+Replaces: ampache (<< 3.8.1-1)
+Breaks: ampache (<< 3.8.1-1)
 Recommends: ${misc:Recommends}, php5-curl, apache2 | httpd,
 Suggests: php5-gd, phpmyadmin, mysql-server, eyed3, faad, ffmpeg, vorbis-tools
 Description: web-based audio file management system
@@ -52,17 +45,10 @@ Package: ampache-common
 Architecture: all
 Depends: ${misc:Depends},
  php-gettext,
- libjs-jquery,
- libjs-jquery-cookie,
- libjs-jquery-jplayer,
- libjs-jquery-ui,
- libphp-phpmailer,
- ttf-freefont,
- php-getid3 (>= 1.9.5),
- php-openid
-Replaces: ampache (<< 3.7.1-develop1-1)
-Breaks: ampache (<< 3.7.1-develop1-1)
-Suggests: ampache, php5-gd, phpmyadmin, mysql-server, eyed3, faad, ffmpeg, vorbis-tools
+ ttf-freefont
+Replaces: ampache (<< 3.8.1-1)
+Breaks: ampache (<< 3.8.1-1)
+Suggests: ampache, php5-gd, phpmyadmin, mysql-server, curl, eyed3, faad, ffmpeg, vorbis-tools
 Description: web-based audio file management system common files
  This package provides common files for Ampache. This package is server
  independent and is intended for users who wish to use other web servers, 
